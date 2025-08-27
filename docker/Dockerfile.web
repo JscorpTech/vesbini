@@ -20,7 +20,11 @@ COPY ./ /code
 RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
 
 COPY ./resources/scripts/$SCRIPT /code/$SCRIPT
-RUN chmod +x /code/$SCRIPT
+
+RUN chmod +x /code/resources/scripts/$SCRIPT
 
 USER ${uid}:${gid}
-CMD sh $SCRIPT
+
+CMD sh /code/resources/scripts/$SCRIPT
+
+
