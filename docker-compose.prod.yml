@@ -29,6 +29,7 @@ services:
       dockerfile: ./docker/Dockerfile.web
     restart: always
     command: ${COMMAND:-sh ./entrypoint.sh}
+    user: "${UID}:${GID}"
     environment:
       - PYTHONPYCACHEPREFIX=/var/cache/pycache
     volumes:
