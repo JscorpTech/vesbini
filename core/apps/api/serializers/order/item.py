@@ -16,7 +16,6 @@ class BaseItemSerializer(serializers.ModelSerializer):
             "product",
             "count",
             "variant",
-            "amount",
         ]
 
 

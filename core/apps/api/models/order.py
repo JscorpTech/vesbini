@@ -41,7 +41,6 @@ class ItemModel(AbstractBaseModel):
     product = models.ForeignKey("ProductModel", on_delete=models.SET_NULL, null=True, related_name="items")
     count = models.BigIntegerField(_("count"), default=1)
     variant = models.ForeignKey("ProductVariantModel", on_delete=models.SET_NULL, null=True, related_name="items")
-    amount = models.BigIntegerField(_("amount"), default=0)
 
     def __str__(self):
         return str(self.pk)
