@@ -30,7 +30,6 @@ services:
       args:
         SCRIPT: ${SCRIPT:-entrypoint.sh}
     restart: always
-    command: ${COMMAND:-sh ./entrypoint.sh}
     environment:
       - PYTHONPYCACHEPREFIX=/var/cache/pycache
       - SCRIPT=${SCRIPT:-entrypoint.sh}
