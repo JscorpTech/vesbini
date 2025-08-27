@@ -3,14 +3,15 @@ FROM jscorptech/django:v0.5
 ARG SCRIPT="entrypoint.sh"
 ENV SCRIPT=$SCRIPT
 
-ARG GID=1000
-ARG UID=1000
+ARG user=appuser
+ARG group=appuser
+ARG uid=1000
+ARG gid=1000
+RUN groupadd -g ${gid} ${group}
+RUN useradd -u ${uid} -g ${group} -s /bin/sh -m ${user} # <--- the '-m' create a user home directory
 
+USER ${uid}:${gid}
 
-RUN groupadd -g $GID appgroup && \
-    useradd -m -u $UID -g $GID appuser
-
-USER appgroup
 
 WORKDIR /code
 

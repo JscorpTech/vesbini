@@ -27,12 +27,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile.web
-      args:
-        UID: ${UID:-1000}
-        GID: ${GID:-1000}
     restart: always
     command: ${COMMAND:-sh ./entrypoint.sh}
-    user: ${UID}:${GID}
     environment:
       - PYTHONPYCACHEPREFIX=/var/cache/pycache
     volumes:
