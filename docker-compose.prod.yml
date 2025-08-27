@@ -27,6 +27,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile.web
+      args:
+        SCRIPT: ${SCRIPT:-entrypoint.sh}
     restart: always
     command: ${COMMAND:-sh ./entrypoint.sh}
     environment:
