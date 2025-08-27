@@ -6,7 +6,6 @@ volumes:
   pg_data: null
   rabbitmq: null
   pycache: null
-  media: null
 
 services:
   nginx:
@@ -34,7 +33,6 @@ services:
       - PYTHONPYCACHEPREFIX=/var/cache/pycache
     volumes:
       - .:/code
-      - media:/resources/media
       - pycache:/var/cache/pycache
     depends_on:
       - db
