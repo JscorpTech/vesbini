@@ -16,6 +16,7 @@ class BaseOrderSerializer(serializers.ModelSerializer):
             "id",
             "items",
             "status",
+            "payment_status",
             "amount",
         ]
 

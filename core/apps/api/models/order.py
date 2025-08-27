@@ -15,6 +15,7 @@ class OrderModel(AbstractBaseModel):
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(verbose_name=_("status"), max_length=255, choices=STATUS, default="pending")
+    payment_status = models.BooleanField(_("payment status"), default=False)
 
     @property
     def amount(self):
