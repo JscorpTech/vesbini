@@ -31,6 +31,7 @@ services:
     command: ${COMMAND:-sh ./entrypoint.sh}
     environment:
       - PYTHONPYCACHEPREFIX=/var/cache/pycache
+      - SCRIPT=${SCRIPT:-entrypoint.sh}
     volumes:
       - .:/code
       - pycache:/var/cache/pycache
