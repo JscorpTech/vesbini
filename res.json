@@ -1,0 +1,53 @@
+{
+    "context": {
+        "employee": {
+            "meta": {
+                "href": "https://api.moysklad.ru/api/remap/1.2/context/employee",
+                "metadataHref": "https://api.moysklad.ru/api/remap/1.2/entity/employee/metadata",
+                "type": "employee",
+                "mediaType": "application/json"
+            }
+        }
+    },
+    "meta": {
+        "href": "https://api.moysklad.ru/api/remap/1.2/report/stock/all?filter=product=https://api.moysklad.ru/api/remap/1.2/entity/product/3d33ddaf-5e56-11f0-0a80-01f4001b81ae",
+        "type": "stock",
+        "mediaType": "application/json",
+        "size": 1,
+        "limit": 1000,
+        "offset": 0
+    },
+    "rows": [
+        {
+            "meta": {
+                "href": "https://api.moysklad.ru/api/remap/1.2/entity/product/3d33ddaf-5e56-11f0-0a80-01f4001b81ae?expand=supplier",
+                "metadataHref": "https://api.moysklad.ru/api/remap/1.2/entity/product/metadata",
+                "type": "product",
+                "mediaType": "application/json",
+                "uuidHref": "https://online.moysklad.ru/app/#good/edit?id=3d33c5ba-5e56-11f0-0a80-01f4001b81a6"
+            },
+            "stock": 16.0,
+            "inTransit": 0.0,
+            "reserve": 0.0,
+            "quantity": 16.0,
+            "name": "2ta uzuk va braslet",
+            "code": "#21608",
+            "article": "M592",
+            "price": 500000.0,
+            "salePrice": 0.0,
+            "uom": {},
+            "folder": {
+                "meta": {
+                    "href": "https://api.moysklad.ru/api/remap/1.2/entity/productfolder/acb109b5-c8c8-11ee-0a80-131e002d394f",
+                    "metadataHref": "https://api.moysklad.ru/api/remap/1.2/entity/productfolder/metadata",
+                    "type": "productfolder",
+                    "mediaType": "application/json",
+                    "uuidHref": "https://online.moysklad.ru/app/#good/edit?id=acb109b5-c8c8-11ee-0a80-131e002d394f"
+                },
+                "name": "Dona dukon"
+            },
+            "externalCode": "k4ybiRBqgRTB35zl76-Ol0",
+            "stockDays": 44.78
+        }
+    ]
+}

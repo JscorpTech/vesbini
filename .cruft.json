@@ -1,0 +1,33 @@
+{
+  "template": "https://github.com/JscorpTech/django",
+  "commit": "ab2e44cb083c98ee05505ab91e66e69226283fc6",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "vesbini",
+      "project_slug": "vesbini",
+      "settings_module": "config.settings.local",
+      "runner": "wsgi",
+      "celery": "no",
+      "cache": "no",
+      "script": "entrypoint.sh",
+      "key": "key",
+      "port": "8081",
+      "phone": "998888112309",
+      "password": "2309",
+      "max_line_length": "120",
+      "silk": true,
+      "storage": true,
+      "channels": true,
+      "rosetta": false,
+      "cacheops": true,
+      "ckeditor": true,
+      "modeltranslation": true,
+      "parler": false,
+      "version": "0.1.1",
+      "_template": "https://github.com/JscorpTech/django",
+      "_commit": "ab2e44cb083c98ee05505ab91e66e69226283fc6"
+    }
+  },
+  "directory": null
+}

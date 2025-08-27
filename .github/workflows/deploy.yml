@@ -1,0 +1,65 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main  # or 'master' or any branch you want to trigger deployment
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # Important: This targets the self-hosted runner
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: make .env
+        run: |
+            echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
+            echo "DEBUG=True" >> .env
+            echo "DJANGO_SETTINGS_MODULE=config.settings.local" >> .env
+            echo "COMMAND=sh ./resources/scripts/entrypoint.sh" >> .env
+            echo "SCRIPT=sh entrypoint-server.sh" >> .env
+            echo "PORT=${{ vars.PORT || '8081' }}" >> .env
+            echo "PROJECT_ENV=${{ vars.PROJECT_ENV || 'debug' }}" >> .env
+            echo "PROTOCOL_HTTPS=${{ vars.PROTOCOL_HTTPS || 'False' }}" >> .env
+
+            echo "DB_ENGINE=django.db.backends.postgresql_psycopg2" >> .env
+            echo "DB_NAME=django" >> .env
+            echo "DB_USER=postgres" >> .env
+            echo "DB_PASSWORD=2309" >> .env
+            echo "DB_HOST=db" >> .env
+            echo "DB_PORT=5432" >> .env
+
+            echo "CACHE_BACKEND=django.core.cache.backends.redis.RedisCache" >> .env
+            echo "REDIS_URL=redis://redis:6379" >> .env
+            echo "CACHE_ENABLED=False" >> .env
+            echo "CACHE_TIMEOUT=120" >> .env
+
+            echo "VITE_LIVE=False" >> .env
+            echo "VITE_PORT=5173" >> .env
+            echo "VITE_HOST=127.0.0.1" >> .env
+
+            echo "SMS_API_URL=https://notify.eskiz.uz/api" >> .env
+            echo "SMS_LOGIN=admin@gmail.com" >> .env
+            echo "SMS_PASSWORD=key" >> .env
+
+            echo "ALLOWED_HOSTS=${{ vars.ALLOWED_HOSTS || 'localhost,web,127.0.0.1' }}" >> .env
+            echo "CSRF_TRUSTED_ORIGINS=${{ vars.CSRF_TRUSTED_ORIGINS || 'http://localhost' }}" >> .env
+
+            echo "OTP_MODULE=core.services.otp" >> .env
+            echo "OTP_SERVICE=EskizService" >> .env
+
+            echo "STORAGE_ID=id" >> .env
+            echo "STORAGE_KEY=key" >> .env
+            echo "STORAGE_URL=example.com" >> .env
+            echo "STORAGE_DEFAULT=FILE" >> .env
+            echo "STORAGE_STATIC=STATIC" >> .env
+            echo "STORAGE_BUCKET_MEDIA=name" >> .env
+            echo "STORAGE_BUCKET_STATIC=name" >> .env
+            echo "STORAGE_PATH=127.0.0.1:8081/bucket/" >> .env
+            echo "STORAGE_PROTOCOL=http:" >> .env
+
+      - name: Run Deployment Script
+        run: |
+          make deploy-prod
