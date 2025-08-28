@@ -17,8 +17,12 @@ class User(auth_models.AbstractUser):
         default=RoleChoice.USER,
     )
 
+    # address
+    region = models.ForeignKey("RegionModel", on_delete=models.SET_NULL, null=True, blank=True)
+    district = models.ForeignKey("DistrictModel", on_delete=models.SET_NULL, null=True, blank=True)
+
     USERNAME_FIELD = "phone"
-    objects = UserManager()
+    objects = UserManager()  # type: ignore
 
     def __str__(self):
         return self.phone

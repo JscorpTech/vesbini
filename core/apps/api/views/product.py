@@ -1,8 +1,9 @@
 from django_core.mixins import BaseViewSetMixin
+from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
+from rest_framework.filters import SearchFilter
 from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
-from unfold.admin import Model
 
 from core.apps.api.models import BasketModel, CategoryModel, ColorModel, ProductModel, SizeModel, TagModel
 from core.apps.api.serializers.product import (
@@ -33,6 +34,9 @@ class ProductView(BaseViewSetMixin, ReadOnlyModelViewSet):
     queryset = ProductModel.objects.all()
     serializer_class = ListProductSerializer
     permission_classes = [AllowAny]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ["colors", "sizes", "amount"]
+    search_fields = ["title", "desc"]
 
     action_permission_classes = {}
     action_serializer_class = {

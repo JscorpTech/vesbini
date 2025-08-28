@@ -1,9 +1,12 @@
-from config.env import env
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext as _
 from rest_framework import exceptions, serializers
 
-OTP_SIZE = env.int("OTP_SIZE", 4)
+from config.env import env
+
+OTP_SIZE = env.int("OTP_SIZE", 4)  # type: ignore
+
+
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=255)
     password = serializers.CharField(max_length=255)
@@ -20,12 +23,17 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ["first_name", "last_name", "phone", "password"]
+        fields = ["first_name", "phone", "password", "region", "district"]
         extra_kwargs = {
             "first_name": {
                 "required": True,
             },
-            "last_name": {"required": True},
+            "region": {
+                "required": True,
+            },
+            "district": {
+                "required": True,
+            },
         }
 
 

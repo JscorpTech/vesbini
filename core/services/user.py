@@ -1,11 +1,13 @@
 from datetime import datetime
 
-from core.services import sms
 from django.contrib.auth import get_user_model, hashers
 from django.utils.translation import gettext as _
 from django_core import exceptions
 from rest_framework.exceptions import PermissionDenied
 from rest_framework_simplejwt import tokens
+
+from core.apps.accounts.serializers.address import district
+from core.services import sms
 
 
 class UserService(sms.SmsService):
@@ -17,13 +19,14 @@ class UserService(sms.SmsService):
             "access": str(refresh.access_token),
         }
 
-    def create_user(self, phone, first_name, last_name, password):
+    def create_user(self, phone, first_name, password, region, district):
         get_user_model().objects.update_or_create(
             phone=phone,
             defaults={
                 "phone": phone,
                 "first_name": first_name,
-                "last_name": last_name,
+                "region_id": region,
+                "district_id": district,
                 "password": hashers.make_password(password),
             },
         )
