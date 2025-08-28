@@ -19,18 +19,18 @@ jobs:
 
       - name: Build and Start Services for Testing
         run: |
-          docker compose -f docker-compose.test.yml build
-          docker compose -f docker-compose.test.yml up -d
+          docker compose -f docker-compose.test.yml -p vesbini_test build
+          docker compose -f docker-compose.test.yml -p vesbini_test up -d
           make migrate
 
       - name: Run Tests
         run: |
-          docker compose -f docker-compose.test.yml exec -e DJANGO_SETTINGS_MODULE=config.settings.test web pytest -v
+          docker compose -f docker-compose.test.yml -p vesbini_test exec -e DJANGO_SETTINGS_MODULE=config.settings.test web pytest -v
 
       - name: Stop Containers After Test
         if: always()
         run: |
-          docker compose -f docker-compose.test.yml down -v
+          docker compose -f docker-compose.test.yml -p vesbini_test down -v
 
   deploy:
     runs-on: self-hosted
