@@ -17,6 +17,10 @@ jobs:
         run: |
           cp /opt/env/.env.vesbini /opt/projects/vesbini/_work/vesbini/vesbini/.env
 
+      - name: Env updated
+        run: |
+          echo "DJANGO_SETTINGS_MODULE=config.settings.test" > /opt/projects/vesbini/_work/vesbini/vesbini/.env
+
       - name: Build and Start Services for Testing
         run: |
           docker compose -f docker-compose.test.yml build
@@ -41,6 +45,7 @@ jobs:
 
       - name: make .env
         run: |
+
           cp /opt/env/.env.vesbini /opt/projects/vesbini/_work/vesbini/vesbini/.env
 
       - name: Run Deployment Script
