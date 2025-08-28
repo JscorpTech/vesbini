@@ -19,7 +19,7 @@ jobs:
 
       - name: Env updated
         run: |
-          echo "DJANGO_SETTINGS_MODULE=config.settings.test" > /opt/projects/vesbini/_work/vesbini/vesbini/.env
+          echo "DJANGO_SETTINGS_MODULE=config.settings.test" >> /opt/projects/vesbini/_work/vesbini/vesbini/.env
 
       - name: Build and Start Services for Testing
         run: |

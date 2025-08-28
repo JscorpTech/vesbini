@@ -8,7 +8,6 @@ ARG group=appuser
 ARG uid=1000
 ARG gid=1000
 
-RUN echo $SCRIPT && sleep 20
 RUN addgroup -g ${gid} ${group} \
     && adduser -D -u ${uid} -G ${group} -s /bin/sh ${user}
 
