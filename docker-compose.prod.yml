@@ -38,8 +38,8 @@ services:
       - SCRIPT=${SCRIPT:-entrypoint.sh}
     volumes:
       - ./resources/logs/:/code/resources/logs/
-      - media:/usr/share/nginx/html/resources/media/
-      - static:/usr/share/nginx/html/resources/staticfiles/
+      - media:/code/resources/media/
+      - static:/code/resources/staticfiles/
       - pycache:/var/cache/pycache
     depends_on:
       - db
