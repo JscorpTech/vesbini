@@ -28,4 +28,15 @@ PAGES = [
             },
         ],
     },
+    {
+        "title": _("Dashboard"),
+        "separator": True,  # Top border
+        "items": [
+            {
+                "title": _("Users"),
+                "icon": "group",
+                "link": reverse_lazy("admin:http_user_changelist"),
+            },
+        ],
+    },
 ]
