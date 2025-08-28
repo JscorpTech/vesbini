@@ -32,6 +32,7 @@ class DistrictModel(AbstractBaseModel):
     def _create_fake(cls):
         return cls.objects.create(
             name="mock",
+            region=RegionModel._create_fake(),
         )
 
     class Meta:
