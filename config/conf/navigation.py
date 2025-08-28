@@ -19,7 +19,7 @@ PAGES = [
             {
                 "title": _("Users"),
                 "icon": "group",
-                "link": reverse_lazy("admin:http_user_changelist"),
+                "link": reverse_lazy("admin:accounts_user_changelist"),
             },
             {
                 "title": _("Group"),
@@ -33,9 +33,45 @@ PAGES = [
         "separator": True,  # Top border
         "items": [
             {
-                "title": _("Users"),
-                "icon": "group",
-                "link": reverse_lazy("admin:http_user_changelist"),
+                "title": _("Maxsulot"),
+                "icon": "add_shopping_cart",
+                "link": reverse_lazy("admin:api_productmodel_changelist"),
+            },
+            {
+                "title": _("Karegoriya"),
+                "icon": "category",
+                "link": reverse_lazy("admin:api_categorymodel_changelist"),
+            },
+            {
+                "title": _("Rang"),
+                "icon": "format_color_fill",
+                "link": reverse_lazy("admin:api_colormodel_changelist"),
+            },
+            {
+                "title": _("O'lcham"),
+                "icon": "eraser_size_1",
+                "link": reverse_lazy("admin:api_sizemodel_changelist"),
+            },
+            {
+                "title": _("Buyurtmalar"),
+                "icon": "order_approve",
+                "link": reverse_lazy("admin:api_ordermodel_changelist"),
+            },
+        ],
+    },
+    {
+        "title": _("Address"),
+        "separator": True,  # Top border
+        "items": [
+            {
+                "title": _("Shaxar/Viloyat"),
+                "icon": "explore_nearby",
+                "link": reverse_lazy("admin:accounts_regionmodel_changelist"),
+            },
+            {
+                "title": _("Shaxar/Tuman"),
+                "icon": "globe_uk",
+                "link": reverse_lazy("admin:accounts_districtmodel_changelist"),
             },
         ],
     },
