@@ -3,14 +3,6 @@ FROM jscorptech/django:v0.5
 ARG SCRIPT="entrypoint.sh"
 ENV SCRIPT=$SCRIPT
 
-ARG user=appuser
-ARG group=appuser
-ARG uid=1000
-ARG gid=1000
-
-RUN addgroup -g ${gid} ${group} \
-    && adduser -D -u ${uid} -G ${group} -s /bin/sh ${user}
-
 
 WORKDIR /code
 
@@ -21,8 +13,6 @@ RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
 COPY ./resources/scripts/$SCRIPT /code/$SCRIPT
 
 RUN chmod +x /code/resources/scripts/$SCRIPT
-
-USER ${uid}:${gid}
 
 CMD sh /code/resources/scripts/$SCRIPT
 
