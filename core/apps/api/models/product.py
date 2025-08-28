@@ -23,9 +23,12 @@ class ProductModel(AbstractBaseModel):
 
     @classmethod
     def _create_fake(cls):
-        return cls.objects.create(
-            name="mock",
-        )
+        return cls.objects.get_or_create(
+            title="mock",
+            desc="sasa",
+            image="none",
+            amount=0,
+        )[0]
 
     class Meta:
         db_table = "product"
@@ -42,6 +45,14 @@ class ProductVariantModel(AbstractBaseModel):
 
     def __str__(self) -> str:
         return f"color: {self.color} - size: {self.size} - quantity: {self.quantity}"
+
+    @classmethod
+    def _create_fake(cls):
+        return cls.objects.get_or_create(
+            product=ProductModel._create_fake(),
+            color=ColorModel._create_fake(),
+            size=SizeModel._create_fake(),
+        )[0]
 
 
 class TagModel(AbstractBaseModel):
@@ -63,7 +74,6 @@ class TagModel(AbstractBaseModel):
 
 
 class CategoryModel(AbstractBaseModel):
-
     name = models.CharField(verbose_name=_("name"), max_length=255)
 
     def __str__(self):
@@ -129,7 +139,9 @@ class BasketModel(AbstractBaseModel):
     @classmethod
     def _create_fake(cls):
         return cls.objects.create(
-            name="mock",
+            user=User._create_fake(),
+            product=ProductModel._create_fake(),
+            variant=ProductVariantModel._create_fake(),
         )
 
     class Meta:

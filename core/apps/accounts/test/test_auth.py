@@ -1,16 +1,17 @@
 import logging
 from unittest.mock import patch
 
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
+from django_core.models import SmsConfirm
 from pydantic import BaseModel
 from rest_framework import status
 from rest_framework.test import APIClient
 
 from core.apps.accounts.models import ResetToken
-from django_core.models import SmsConfirm
+from core.apps.accounts.models.address import DistrictModel, RegionModel
 from core.services import SmsService
-from django.contrib.auth import get_user_model
 
 
 class TokenModel(BaseModel):
@@ -35,8 +36,9 @@ class SmsViewTest(TestCase):
         data = {
             "phone": "998999999991",
             "first_name": "John",
-            "last_name": "Doe",
             "password": "password",
+            "region": RegionModel._create_fake(),
+            "district": DistrictModel._create_fake(),
         }
         with patch.object(SmsService, "send_confirm", return_value=True):
             response = self.client.post(reverse("auth-register"), data=data)

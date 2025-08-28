@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_core.models import AbstractBaseModel
 
+from core.apps.api.models.product import ProductModel, ProductVariantModel
 from core.apps.api.services.order import order_total_amount
 
 User = get_user_model()
@@ -27,7 +28,7 @@ class OrderModel(AbstractBaseModel):
     @classmethod
     def _create_fake(cls):
         return cls.objects.create(
-            name="mock",
+            user=User._create_fake(),
         )
 
     class Meta:
@@ -49,7 +50,11 @@ class ItemModel(AbstractBaseModel):
     @classmethod
     def _create_fake(cls):
         return cls.objects.create(
-            name="mock",
+            order=OrderModel._create_fake(),
+            product=ProductModel._create_fake(),
+            count=10,
+            variant=ProductVariantModel._create_fake(),
+            amount=1000,
         )
 
     class Meta:
