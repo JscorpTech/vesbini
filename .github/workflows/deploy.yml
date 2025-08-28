@@ -15,7 +15,7 @@ jobs:
 
       - name: make .env
         run: |
-          cp /opt/env/.env.test.vesbini /opt/projects/vesbini/_work/vesbini/vesbini/.env
+          cp /opt/env/.env.vesbini /opt/projects/vesbini/_work/vesbini/vesbini/.env
 
       - name: Build and Start Services for Testing
         run: |
@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          docker compose -f docker-compose.test.yml exec web pytest -v
+          docker compose -f docker-compose.test.yml exec -e DJANGO_SETTINGS_MODULE=config.settings.test web pytest -v
 
       - name: Stop Containers After Test
         if: always()
