@@ -34,6 +34,7 @@ services:
       - PYTHONPYCACHEPREFIX=/var/cache/pycache
       - SCRIPT=${SCRIPT:-entrypoint.sh}
     volumes:
+      - ./resources/logs/:/code/resources/logs/
       - pycache:/var/cache/pycache
     depends_on:
       - db
