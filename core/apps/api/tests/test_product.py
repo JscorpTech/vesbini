@@ -40,6 +40,7 @@ class ProductTest(TestCase):
         response = self.client.get(self.urls["retrieve"])
         self.assertTrue(response.json()["status"])
         self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.json()["status"])
 
     def test_retrieve_not_found(self):
         response = self.client.get(self.urls["retrieve-not-found"])
