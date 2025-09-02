@@ -1,5 +1,5 @@
 networks:
-  smart_school:
+  vesbini:
     driver: bridge
 
 volumes:
@@ -11,7 +11,7 @@ volumes:
 services:
   nginx:
     networks:
-      - smart_school
+      - vesbini
     ports:
       - ${PORT:-8001}:80
     volumes:
@@ -25,7 +25,7 @@ services:
       - web
   web:
     networks:
-      - smart_school
+      - vesbini 
     build:
       context: .
       dockerfile: ./docker/Dockerfile.web
@@ -45,7 +45,7 @@ services:
       - redis
   db:
     networks:
-      - smart_school
+      - vesbini 
     image: postgres:16
     restart: always
     environment:
@@ -56,6 +56,6 @@ services:
       - pg_data:/var/lib/postgresql/data
   redis:
     networks:
-      - smart_school
+      - vesbini 
     restart: always
     image: redis
