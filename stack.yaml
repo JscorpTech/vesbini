@@ -3,7 +3,6 @@ version: "3.9"
 services:
   db:
     image: postgres:16.3-alpine
-    restart: always
     environment:
       - POSTGRES_DB=django
       - POSTGRES_USER=postgres
@@ -35,7 +34,6 @@ services:
 
   redis:
     image: redis:7-alpine
-    restart: always
     command: ["redis-server", "--appendonly", "yes"]
     networks:
       - vesbini
@@ -61,7 +59,6 @@ services:
 
   web:
     image: jscorptech/vesbini:latest
-    restart: always
     environment:
       - SCRIPT=entrypoint.sh
       - PYTHONPYCACHEPREFIX=/var/cache/pycache
@@ -78,7 +75,7 @@ services:
     deploy:
       replicas: 1
       restart_policy:
-        condition: any
+        condition: any 
       update_config:
         failure_action: rollback 
         monitor: 30s
@@ -94,7 +91,6 @@ services:
 
   nginx:
     image: nginx:1.27-alpine
-    restart: always
     ports:
       - mode: host 
         target: 80
