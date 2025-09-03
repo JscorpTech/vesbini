@@ -18,14 +18,12 @@ services:
           - node.role == manager
       restart_policy:
         condition: any
-        monitor: 30s
         max_attempts: 0
       update_config:
         parallelism: 1
         order: start-first
         failure_action: rollback 
         monitor: 30s
-        delay: 30s
         max_failure_ratio: 0.2
     logging:
       driver: json-file
