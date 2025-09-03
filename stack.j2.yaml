@@ -83,7 +83,7 @@ services:
       - /tmp
       - /run
     deploy:
-      replicas: 5
+      replicas: 1
       restart_policy:
         condition: any 
       update_config:
@@ -121,7 +121,7 @@ services:
     networks:
       - vesbini
     deploy:
-      replicas: 5
+      replicas: 1
       restart_policy:
         condition: any
       placement:
