@@ -92,7 +92,7 @@ services:
   nginx:
     image: nginx:1.27-alpine
     ports:
-      - mode: host 
+      - mode: ingress 
         target: 80
         published: 8002
         protocol: tcp
