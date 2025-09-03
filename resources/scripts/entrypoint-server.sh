@@ -6,6 +6,7 @@ while ! nc -z db 5432; do
 done
 
 python3 manage.py collectstatic --noinput
+python3 manage.py migrate --noinput
 
 gunicorn config.wsgi:application -b 0.0.0.0:8000 --workers 4 # $(($(nproc) * 2 + 1)) 
 

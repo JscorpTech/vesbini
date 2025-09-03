@@ -1,27 +1,27 @@
 from rest_framework import serializers
 
-from core.apps.accounts.models import DistrictModel
+from core.apps.accounts.models import RegionModel
 
 
-class BaseDistrictSerializer(serializers.ModelSerializer):
+class BaseRegionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = DistrictModel
+        model = RegionModel
         fields = [
             "id",
             "name",
         ]
 
 
-class ListDistrictSerializer(BaseDistrictSerializer):
-    class Meta(BaseDistrictSerializer.Meta): ...
+class ListRegionSerializer(BaseRegionSerializer):
+    class Meta(BaseRegionSerializer.Meta): ...
 
 
-class RetrieveDistrictSerializer(BaseDistrictSerializer):
-    class Meta(BaseDistrictSerializer.Meta): ...
+class RetrieveRegionSerializer(BaseRegionSerializer):
+    class Meta(BaseRegionSerializer.Meta): ...
 
 
-class CreateDistrictSerializer(BaseDistrictSerializer):
-    class Meta(BaseDistrictSerializer.Meta):
+class CreateRegionSerializer(BaseRegionSerializer):
+    class Meta(BaseRegionSerializer.Meta):
         fields = [
             "id",
             "name",

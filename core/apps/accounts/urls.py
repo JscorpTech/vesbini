@@ -6,7 +6,7 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt import views as jwt_views
 
-from .views import ChangePasswordView, DistrictView, MeView, RegionView, RegisterView, ResetPasswordView
+from .views import ChangePasswordView, CountryView, MeView, RegionView, RegisterView, ResetPasswordView
 
 router = DefaultRouter()
 router.register("auth", RegisterView, basename="auth")
@@ -14,8 +14,8 @@ router.register("auth", ResetPasswordView, basename="reset-password")
 router.register("auth", MeView, basename="me")
 router.register("auth", ChangePasswordView, basename="change-password")
 
-router.register("api/region", RegionView, basename="region")
-router.register("api/district", DistrictView, basename="district")
+router.register("api/country", CountryView, basename="country")
+router.register("api/district", RegionView, basename="region")
 
 
 urlpatterns = [

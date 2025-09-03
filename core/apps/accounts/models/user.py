@@ -18,8 +18,8 @@ class User(auth_models.AbstractUser):
     )
 
     # address
+    country = models.ForeignKey("CountryModel", on_delete=models.SET_NULL, null=True, blank=True)
     region = models.ForeignKey("RegionModel", on_delete=models.SET_NULL, null=True, blank=True)
-    district = models.ForeignKey("DistrictModel", on_delete=models.SET_NULL, null=True, blank=True)
 
     USERNAME_FIELD = "phone"
     objects = UserManager()  # type: ignore

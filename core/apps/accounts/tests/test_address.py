@@ -2,13 +2,13 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework.test import APIClient
 
-from core.apps.accounts.models import DistrictModel, RegionModel
+from core.apps.accounts.models import RegionModel, CountryModel
 
 
 class RegionTest(TestCase):
 
     def _create_data(self):
-        return RegionModel._create_fake()
+        return CountryModel._create_fake()
 
     def setUp(self):
         self.client = APIClient()
@@ -50,7 +50,7 @@ class RegionTest(TestCase):
 class DistrictTest(TestCase):
 
     def _create_data(self):
-        return DistrictModel._create_fake()
+        return RegionModel._create_fake()
 
     def setUp(self):
         self.client = APIClient()

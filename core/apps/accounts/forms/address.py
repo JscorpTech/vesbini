@@ -1,17 +1,17 @@
 from django import forms
 
-from core.apps.accounts.models import DistrictModel, RegionModel
+from core.apps.accounts.models import RegionModel, CountryModel
 
 
 class RegionForm(forms.ModelForm):
 
     class Meta:
-        model = RegionModel
+        model = CountryModel
         fields = "__all__"
 
 
 class DistrictForm(forms.ModelForm):
 
     class Meta:
-        model = DistrictModel
+        model = RegionModel
         fields = "__all__"

@@ -1,27 +1,27 @@
 from rest_framework import serializers
 
-from core.apps.accounts.models import RegionModel
+from core.apps.accounts.models import CountryModel
 
 
-class BaseRegionSerializer(serializers.ModelSerializer):
+class BaseCountrySerializer(serializers.ModelSerializer):
     class Meta:
-        model = RegionModel
+        model = CountryModel
         fields = [
             "id",
             "name",
         ]
 
 
-class ListRegionSerializer(BaseRegionSerializer):
-    class Meta(BaseRegionSerializer.Meta): ...
+class ListCountrySerializer(BaseCountrySerializer):
+    class Meta(BaseCountrySerializer.Meta): ...
 
 
-class RetrieveRegionSerializer(BaseRegionSerializer):
-    class Meta(BaseRegionSerializer.Meta): ...
+class RetrieveCountrySerializer(BaseCountrySerializer):
+    class Meta(BaseCountrySerializer.Meta): ...
 
 
-class CreateRegionSerializer(BaseRegionSerializer):
-    class Meta(BaseRegionSerializer.Meta):
+class CreateCountrySerializer(BaseCountrySerializer):
+    class Meta(BaseCountrySerializer.Meta):
         fields = [
             "id",
             "name",

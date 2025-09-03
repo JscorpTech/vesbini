@@ -64,14 +64,14 @@ PAGES = [
         "separator": True,  # Top border
         "items": [
             {
-                "title": _("Shaxar/Viloyat"),
+                "title": _("Davlat"),
                 "icon": "explore_nearby",
-                "link": reverse_lazy("admin:accounts_regionmodel_changelist"),
+                "link": reverse_lazy("admin:accounts_countrymodel_changelist"),
             },
             {
                 "title": _("Shaxar/Tuman"),
                 "icon": "globe_uk",
-                "link": reverse_lazy("admin:accounts_districtmodel_changelist"),
+                "link": reverse_lazy("admin:accounts_regionmodel_changelist"),
             },
         ],
     },
