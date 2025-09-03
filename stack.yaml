@@ -14,6 +14,9 @@ services:
       - vesbini
     deploy:
       replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
       restart_policy:
         condition: any
         delay: 20s
@@ -38,6 +41,9 @@ services:
       - vesbini
     deploy:
       replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
       restart_policy:
         condition: any
       update_config:
@@ -90,7 +96,7 @@ services:
     image: nginx:1.27-alpine
     restart: always
     ports:
-      - mode: ingress
+      - mode: host 
         target: 80
         published: 8002
         protocol: tcp
@@ -107,6 +113,9 @@ services:
       replicas: 1
       restart_policy:
         condition: any
+      placement:
+        constraints:
+          - node.role == manager
       update_config:
         failure_action: rollback 
         monitor: 30s
