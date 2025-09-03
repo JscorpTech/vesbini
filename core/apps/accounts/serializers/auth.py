@@ -23,15 +23,15 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ["first_name", "phone", "password", "region", "district"]
+        fields = ["first_name", "phone", "password", "country", "region"]
         extra_kwargs = {
             "first_name": {
                 "required": True,
             },
-            "region": {
+            "country": {
                 "required": True,
             },
-            "district": {
+            "region": {
                 "required": True,
             },
         }

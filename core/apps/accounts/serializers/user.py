@@ -14,5 +14,5 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         fields = [
             "first_name",
             "region",
-            "district",
+            "country",
         ]

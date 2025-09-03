@@ -10,7 +10,7 @@ from rest_framework import status
 from rest_framework.test import APIClient
 
 from core.apps.accounts.models import ResetToken
-from core.apps.accounts.models.address import RegionModel, CountryModel
+from core.apps.accounts.models.address import CountryModel, RegionModel
 from core.services import SmsService
 
 
@@ -37,8 +37,8 @@ class SmsViewTest(TestCase):
             "phone": "998999999991",
             "first_name": "John",
             "password": "password",
-            "region": CountryModel._create_fake(),
-            "district": RegionModel._create_fake(),
+            "country": CountryModel._create_fake(),
+            "region": RegionModel._create_fake(),
         }
         with patch.object(SmsService, "send_confirm", return_value=True):
             response = self.client.post(reverse("auth-register"), data=data)

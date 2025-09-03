@@ -32,7 +32,7 @@ class RegionModel(AbstractBaseModel):
     def _create_fake(cls):
         return cls.objects.create(
             name="mock",
-            region=CountryModel._create_fake(),
+            country=CountryModel._create_fake(),
         )
 
     class Meta:
