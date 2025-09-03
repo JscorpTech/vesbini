@@ -15,7 +15,7 @@ router.register("auth", MeView, basename="me")
 router.register("auth", ChangePasswordView, basename="change-password")
 
 router.register("api/country", CountryView, basename="country")
-router.register("api/district", RegionView, basename="region")
+router.register("api/region", RegionView, basename="region")
 
 
 urlpatterns = [
