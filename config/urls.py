@@ -13,7 +13,7 @@ from config.env import env
 
 
 def home(request):
-    return HttpResponse("Salom Bratishka", status=200)
+    return HttpResponse("OK", status=200)
 
 
 ################
