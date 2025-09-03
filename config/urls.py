@@ -8,12 +8,13 @@ from django.http import HttpResponse
 from django.urls import include, path, re_path
 from django.views.static import serve
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from rest_framework.response import Response
 
 from config.env import env
 
 
 def home(request):
-    return HttpResponse(status=204)
+    return Response(data={"detail": "Salom bratishka"})
 
 
 ################
