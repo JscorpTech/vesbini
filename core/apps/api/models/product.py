@@ -13,6 +13,8 @@ class ProductModel(AbstractBaseModel):
     colors = models.ManyToManyField("ColorModel")
     sizes = models.ManyToManyField("SizeModel")
     amount = models.BigIntegerField(_("amount"), default=0)
+    tags = models.ManyToManyField("TagModel", related_name="products", blank=True)
+    categories = models.ManyToManyField("CategoryModel", related_name="products", blank=True)
 
     @property
     def quantity(self):
@@ -42,6 +44,7 @@ class ProductVariantModel(AbstractBaseModel):
     size = models.ForeignKey("SizeModel", on_delete=models.CASCADE)
     quantity = models.BigIntegerField(_("quantity"), default=0)
     amount = models.BigIntegerField(_("amount"), default=0)
+    sku = models.CharField(_("sku"), max_length=255, unique=True, blank=True, null=True)
 
     def __str__(self) -> str:
         return f"color: {self.color} - size: {self.size} - quantity: {self.quantity}"
@@ -59,7 +62,7 @@ class TagModel(AbstractBaseModel):
     name = models.CharField(verbose_name=_("name"), max_length=255)
 
     def __str__(self):
-        return str(self.pk)
+        return str(self.name)
 
     @classmethod
     def _create_fake(cls):
@@ -77,7 +80,7 @@ class CategoryModel(AbstractBaseModel):
     name = models.CharField(verbose_name=_("name"), max_length=255)
 
     def __str__(self):
-        return str(self.pk)
+        return str(self.name)
 
     @classmethod
     def _create_fake(cls):

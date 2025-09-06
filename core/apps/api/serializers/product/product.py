@@ -1,3 +1,4 @@
+from django.db import models
 from rest_framework import serializers
 
 from core.apps.api.models import ProductModel
@@ -20,7 +21,19 @@ class BaseProductSerializer(serializers.ModelSerializer):
 
 
 class ListProductSerializer(BaseProductSerializer):
-    class Meta(BaseProductSerializer.Meta): ...
+    amount = serializers.SerializerMethodField()
+
+    def get_amount(self, obj):
+        return obj.variants.aggregate(amount__min=models.Min("amount"))["amount__min"]
+
+    class Meta(BaseProductSerializer.Meta):
+        fields = [
+            "id",
+            "title",
+            "desc",
+            "image",
+            "amount",
+        ]
 
 
 class RetrieveProductSerializer(BaseProductSerializer):
