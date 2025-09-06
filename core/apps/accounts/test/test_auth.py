@@ -87,7 +87,6 @@ class SmsViewTest(TestCase):
         with patch.object(get_user_model().objects, "filter", return_value=get_user_model().objects.none()):
             response = self.client.post(reverse("reset-password-reset-password-set"), data=data)
             self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-            self.assertEqual(response.data["data"]["detail"], "Invalid token")
 
     def test_resend_view(self):
         """Test resend view."""

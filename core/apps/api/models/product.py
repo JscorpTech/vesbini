@@ -57,6 +57,7 @@ class ProductVariantModel(AbstractBaseModel):
             product=ProductModel._create_fake(),
             color=ColorModel._create_fake(),
             size=SizeModel._create_fake(),
+            quantity=100,
         )[0]
 
 
