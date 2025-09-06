@@ -9,6 +9,9 @@ python3 manage.py collectstatic --noinput
 python3 manage.py migrate --noinput
 python3 manage.py compilemessages
 
+celery -A config worker -l info &
+celery -A config beat -l info &
+
 gunicorn config.wsgi:application -b 0.0.0.0:8000 --workers 4 # $(($(nproc) * 2 + 1)) 
 
 

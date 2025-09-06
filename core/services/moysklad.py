@@ -1,46 +1,49 @@
-import base64
-import json
-from pprint import pprint
+import httpx
 
-import requests
+from config.env import env
 
 
 class MoySklad:
     def __init__(self) -> None:
         # INFO: base_uri https://api.moysklad.ru/api/remap/1.2
-        self.client = requests.Session()
-        self.client.headers = {"Accept-Encoding": "gzip"}
         self.base_uri = "https://api.moysklad.ru/api/remap/1.2"
-        self.login = "sotuv@vesbini"
-        self.password = "5517f4a54d38fffb0a3ee952c9dd6d2a51f1bd81"
-        self.products()
-
-    def _path(self, path: str) -> str:
-        return f"{self.base_uri}/{path}"
-
-    def _basic_token(self):
-        return base64.b64encode(f"{self.login}:{self.password}".encode("utf-8"))
-
-    def _token(self):
-        token = self._basic_token()
-        response = self.client.post(self._path("security/token"), headers={"Authorization": f"Basic {token}"})
-        print(response.json())
-
-    def variant(self):
-        response = self.client.get(
-            "https://api.moysklad.ru/api/remap/1.2/report/stock/all?filter=product="
-            + self._path("entity/product/3d33ddaf-5e56-11f0-0a80-01f4001b81ae"),
-            headers={"Authorization": "Bearer 5517f4a54d38fffb0a3ee952c9dd6d2a51f1bd81"},
+        self.client = httpx.Client(
+            base_url=self.base_uri,
+            event_hooks={
+                "request": [self.on_request],
+            },
         )
-        with open("res.json", "w") as file:
-            json.dump(response.json(), file, indent=4)
+        self.login = env.str("MOYSKLAD_LOGIN")
+        self.password = env.str("MOYSKLAD_PASSWORD")
 
-    def products(self):
+    def on_request(self, request: httpx.Request):
+        request.headers["Accept-Encoding"] = "gzip"
+        request.headers["Authorization"] = "Bearer {}".format(self.password)
+
+    def stok(self, codes):
+        ids = self.product_ids(codes)
+        url = ""
+        for _id, _ in ids:
+            url += "product=https://api.moysklad.ru/api/remap/1.2/entity/product/{};".format(_id)
+        response = self.client.get("report/stock/all?filter={}".format(url))
+        rows = response.json().get("rows", [])
+        if len(rows) <= 0:
+            raise Exception("product not in stock")
+        for row in rows:
+            code = row["externalCode"]
+            quantity = row["quantity"]
+            yield code, quantity
+
+    def product_ids(self, codes):
+        # k4ybiRBqgRTB35zl76-Ol0
+        url = ""
+        for code in codes:
+            url += "externalCode={};".format(code)
         response = self.client.get(
-            "https://api.moysklad.ru/api/remap/1.2/report/stock/all?filter=product="
-            + self._path("entity/product/3d33ddaf-5e56-11f0-0a80-01f4001b81ae"),
-            headers={"Authorization": "Bearer 5517f4a54d38fffb0a3ee952c9dd6d2a51f1bd81"},
+            "entity/product/?filter={}".format(url),
         )
-        print(response.request.url)
-        with open("res.json", "w") as file:
-            json.dump(response.json(), file, indent=4)
+        rows = response.json().get("rows", [])
+        if len(rows) <= 0:
+            raise Exception("Product not found")
+        for row in rows:
+            yield row["id"], row["externalCode"]

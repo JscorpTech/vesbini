@@ -22,7 +22,7 @@ def user_signal(sender, created, instance, **kwargs):
 def profile_signal(sender, created, instance, **kwargs):
     if not created:
         return
-    data = instance.user.id
+    data = "{}:{}".format(instance.user.username, instance.id)
     filename = "qrcode/{}.png".format(instance.user.id)
     qr = qrcode.QRCode(
         version=1,  # avtomatik o‘lcham uchun 1 yoki None

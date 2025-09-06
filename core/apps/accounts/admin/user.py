@@ -31,7 +31,7 @@ class CustomUserAdmin(admin.UserAdmin, ModelAdmin):
         ("role", ChoicesDropdownFilter),
     )
     search_fields = ["first_name", "phone", "last_name", "username"]
-    list_display = ("first_name", "last_name", "phone", "role", "_balance")
+    list_display = ("first_name", "last_name", "phone", "role", "_balance", "created_at")
     autocomplete_fields = ["groups", "user_permissions"]
     fieldsets = ((None, {"fields": ("phone",)}),) + (
         (None, {"fields": ("username", "password", "country", "region")}),
