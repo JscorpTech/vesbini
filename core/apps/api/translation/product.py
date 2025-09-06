@@ -5,27 +5,27 @@ from core.apps.api.models import BasketModel, CategoryModel, ColorModel, Product
 
 @register(ProductModel)
 class ProductTranslation(TranslationOptions):
-    fields = []
+    fields = ["title", "desc"]
 
 
 @register(TagModel)
 class TagTranslation(TranslationOptions):
-    fields = []
+    fields = ["name"]
 
 
 @register(CategoryModel)
 class CategoryTranslation(TranslationOptions):
-    fields = []
+    fields = ["name"]
 
 
 @register(ColorModel)
 class ColorTranslation(TranslationOptions):
-    fields = []
+    fields = ["name"]
 
 
 @register(SizeModel)
 class SizeTranslation(TranslationOptions):
-    fields = []
+    fields = ["name"]
 
 
 @register(BasketModel)
