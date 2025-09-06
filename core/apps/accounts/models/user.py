@@ -1,5 +1,7 @@
 from django.contrib.auth import models as auth_models
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+from django_core.models import AbstractBaseModel
 
 from ..choices import RoleChoice
 from ..managers import UserManager
@@ -33,3 +35,9 @@ class User(auth_models.AbstractUser):
 
     def __str__(self):
         return "{} {} - {}".format(self.first_name, self.last_name, self.phone)
+
+
+class Profile(AbstractBaseModel):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    qrcode = models.ImageField(_("qrcode"), upload_to="qrcode", null=True, blank=True)
+    balance = models.BigIntegerField(default=0)

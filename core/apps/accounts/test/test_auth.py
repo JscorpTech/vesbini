@@ -37,8 +37,8 @@ class SmsViewTest(TestCase):
             "phone": "998999999991",
             "first_name": "John",
             "password": "password",
-            "country": CountryModel._create_fake(),
-            "region": RegionModel._create_fake(),
+            "country": CountryModel._create_fake().pk,
+            "region": RegionModel._create_fake().pk,
         }
         with patch.object(SmsService, "send_confirm", return_value=True):
             response = self.client.post(reverse("auth-register"), data=data)

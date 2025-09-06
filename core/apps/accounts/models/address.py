@@ -7,7 +7,7 @@ class CountryModel(AbstractBaseModel):
     name = models.CharField(verbose_name=_("name"), max_length=255)
 
     def __str__(self):
-        return str(self.pk)
+        return str(self.name)
 
     @classmethod
     def _create_fake(cls):
@@ -26,7 +26,7 @@ class RegionModel(AbstractBaseModel):
     country = models.ForeignKey("CountryModel", on_delete=models.CASCADE, null=True, blank=False)
 
     def __str__(self):
-        return str(self.pk)
+        return str(self.name)
 
     @classmethod
     def _create_fake(cls):

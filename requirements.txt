@@ -44,3 +44,6 @@ boto3
 # !NOTE: on-websocket
 # websockets
 # channels-redis
+
+# INFO: my
+qrcode

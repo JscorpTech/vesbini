@@ -1,12 +1,15 @@
 from django.contrib import admin
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
 from unfold.admin import ModelAdmin, TabularInline
 from unfold.contrib.filters.admin import (
+    BooleanRadioFilter,
     FieldTextFilter,
     MultipleRelatedDropdownFilter,
 )
 from unfold.contrib.forms.widgets import WysiwygWidget
+from unfold.decorators import display
 
 from core.apps.api.models import BasketModel, CategoryModel, ColorModel, ProductModel, SizeModel, TagModel
 from core.apps.api.models.product import ProductImageModel, ProductVariantModel
@@ -45,6 +48,7 @@ class ProductAdmin(TabbedTranslationAdmin, ModelAdmin):
         ("title", FieldTextFilter),
         ("variants__sku", FieldTextFilter),
         ("desc", FieldTextFilter),
+        ("status", BooleanRadioFilter),
         ("categories", MultipleRelatedDropdownFilter),
         ("tags", MultipleRelatedDropdownFilter),
         ("colors", MultipleRelatedDropdownFilter),
@@ -58,8 +62,19 @@ class ProductAdmin(TabbedTranslationAdmin, ModelAdmin):
     ]
     list_display = (
         "id",
-        "__str__",
+        "title",
+        "_amount",
+        "_status",
+        "created_at",
     )
+
+    @display(description=_("status"), boolean=True)
+    def _status(self, obj):
+        return obj.status
+
+    @display(description=_("amount"), label=True)
+    def _amount(self, obj):
+        return "{:,.2f} so'm".format(obj.amount)
 
 
 @admin.register(TagModel)

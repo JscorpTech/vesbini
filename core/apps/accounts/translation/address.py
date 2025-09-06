@@ -1,13 +1,13 @@
 from modeltranslation.translator import TranslationOptions, register
 
-from core.apps.accounts.models import RegionModel, CountryModel
+from core.apps.accounts.models import CountryModel, RegionModel
 
 
 @register(CountryModel)
 class RegionTranslation(TranslationOptions):
-    fields = []
+    fields = ["name"]
 
 
 @register(RegionModel)
 class DistrictTranslation(TranslationOptions):
-    fields = []
+    fields = ["name"]

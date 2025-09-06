@@ -11,6 +11,7 @@ User = get_user_model()
 class ProductModel(AbstractBaseModel):
     title = models.CharField(verbose_name=_("name"), max_length=255)
     desc = models.TextField(_("desc"))
+    status = models.BooleanField(_("status"), default=True)
     image = models.ImageField(_("image"), upload_to="product/")
     colors = models.ManyToManyField("ColorModel")
     sizes = models.ManyToManyField("SizeModel")
