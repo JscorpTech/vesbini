@@ -3,9 +3,7 @@ from config.env import env
 APPS = [
     "channels",
     "cacheops",
-    
     "django_ckeditor_5",
-    
     "drf_spectacular",
     "rest_framework",
     "corsheaders",
@@ -16,7 +14,7 @@ APPS = [
     "core.apps.accounts.apps.AccountsConfig",
 ]
 
-if env.str("PROJECT_ENV") == "debug":
+if env.bool("SILK_ENABLED", False):
     APPS += [
         "silk",
     ]

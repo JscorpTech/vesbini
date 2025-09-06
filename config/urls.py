@@ -39,8 +39,9 @@ urlpatterns += [
 ################
 # Project env debug mode
 ################
-if env.str("PROJECT_ENV") == "debug":
+if env.bool("SILK_ENEBLED"):
     urlpatterns += [path("silk/", include("silk.urls", namespace="silk"))]
+if env.str("PROJECT_ENV") == "debug":
 
     ################
     # Swagger urls
