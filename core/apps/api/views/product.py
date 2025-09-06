@@ -35,7 +35,7 @@ class ProductView(BaseViewSetMixin, ReadOnlyModelViewSet):
     serializer_class = ListProductSerializer
     permission_classes = [AllowAny]
     filter_backends = [DjangoFilterBackend, SearchFilter]
-    filterset_fields = ["colors", "sizes", "amount"]
+    filterset_fields = ["colors", "sizes", "amount", "categories", "tags"]
     search_fields = ["title", "desc"]
 
     action_permission_classes = {}
