@@ -29,7 +29,7 @@ class ProductVariantInline(TabularInline):
     can_delete = False
 
     def get_readonly_fields(self, request, obj=...):
-        return ["product", "color", "size"]
+        return ["product", "color", "size", "updated_at"]
 
     def has_add_permission(self, request, obj) -> bool:
         return False
