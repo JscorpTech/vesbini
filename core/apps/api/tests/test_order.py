@@ -3,6 +3,7 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 
 from core.apps.api.models import ItemModel, OrderModel
+from core.apps.api.models.product import BasketModel
 
 
 class OrderTest(TestCase):
@@ -21,7 +22,12 @@ class OrderTest(TestCase):
         }
 
     def test_create(self):
-        self.assertTrue(True)
+        response = self.client.post(
+            self.urls["list"],
+            data={"items": [BasketModel._create_fake().id]},
+        )
+        self.assertEqual(response.status_code, 201)
+        self.assertTrue(response.json()["status"])
 
     def test_update(self):
         self.assertTrue(True)

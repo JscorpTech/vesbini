@@ -231,7 +231,17 @@ class BasketTest(TestCase):
         }
 
     def test_create(self):
-        self.assertTrue(True)
+        response = self.client.post(
+            self.urls["list"],
+            data={
+                "product": self.instance.product.id,
+                "color": self.instance.variant.color.id,
+                "size": self.instance.variant.size.id,
+                "quantity": 10,
+            },
+        )
+        self.assertTrue(response.json()["status"])
+        self.assertEqual(response.status_code, 201)
 
     def test_update(self):
         self.assertTrue(True)

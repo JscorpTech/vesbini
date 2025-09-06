@@ -23,8 +23,24 @@ class ListProductVariantSerializer(BaseProductVariantSerializer):
     class Meta(BaseProductVariantSerializer.Meta): ...
 
 
+class MiniProductVariantSerializer(BaseProductVariantSerializer):
+    class Meta(BaseProductVariantSerializer.Meta):
+        fields = [
+            "id",
+            "color",
+            "size",
+        ]
+
+
 class RetrieveProductVariantSerializer(BaseProductVariantSerializer):
-    class Meta(BaseProductVariantSerializer.Meta): ...
+    class Meta(BaseProductVariantSerializer.Meta):
+        fields = [
+            "id",
+            "color",
+            "size",
+            "amount",
+            "quantity",
+        ]
 
 
 class CreateProductVariantSerializer(BaseProductVariantSerializer):

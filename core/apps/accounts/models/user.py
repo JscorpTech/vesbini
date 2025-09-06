@@ -26,6 +26,9 @@ class User(auth_models.AbstractUser):
 
     @classmethod
     def _create_fake(cls):
+        user = cls.objects.filter(phone="999999999").first()
+        if user is not None:
+            return user
         return cls.objects.create_user("999999999", password="nnnnnnn")
 
     def __str__(self):
