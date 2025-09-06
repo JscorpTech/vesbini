@@ -1,14 +1,16 @@
 from django.contrib import admin
-from unfold.admin import ModelAdmin, TabularInline
+from django.utils.translation import gettext_lazy as _
+from unfold.admin import ModelAdmin, StackedInline
+from unfold.contrib.filters.admin import BooleanRadioFilter, ChoicesDropdownFilter, FieldTextFilter
+from unfold.decorators import display
 
 from core.apps.api.models import ItemModel, OrderModel
 from core.apps.api.services.order import order_total_amount
 
 
-class ItemInline(TabularInline):
+class ItemInline(StackedInline):
     model = ItemModel
     extra = 0
-    tab = True
 
     def get_readonly_fields(self, request, obj):
         return ["product", "count", "variant", "amount"]
@@ -23,19 +25,43 @@ class ItemInline(TabularInline):
 @admin.register(OrderModel)
 class OrderAdmin(ModelAdmin):
     inlines = [ItemInline]
-    list_display = (
-        "id",
-        "__str__",
-        "user__first_name",
-        "user__phone",
+    list_filter_submit = True
+    autocomplete_fields = ["user"]
+    list_filter = (
+        ("user__phone", FieldTextFilter),
+        ("user__first_name", FieldTextFilter),
+        ("status", ChoicesDropdownFilter),
+        ("payment_status", BooleanRadioFilter),
     )
+    list_display = ("id", "user__phone", "user__first_name", "_payment_status", "_status", "_amount", "created_at")
 
     readonly_fields = ["amount"]
 
     def amount(self, obj):
-        return order_total_amount(obj)
+        return "{:,.2f} so'm".format(order_total_amount(obj))
 
     amount.short_desctiption = "Amount"
+
+    @display(
+        ordering="status",
+        label={
+            _("new"): "info",
+            _("delivering"): "warning",
+            _("done"): "success",
+            _("canceled"): "danger",
+        },
+        description=_("status"),
+    )
+    def _status(self, obj):
+        return _(obj.status)
+
+    @display(description=_("payment status"), boolean=True)
+    def _payment_status(self, obj):
+        return obj.payment_status
+
+    @display(description=_("amount"), label=True)
+    def _amount(self, obj):
+        return self.amount(obj)
 
 
 @admin.register(ItemModel)

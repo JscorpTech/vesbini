@@ -32,4 +32,4 @@ class User(auth_models.AbstractUser):
         return cls.objects.create_user("999999999", password="nnnnnnn")
 
     def __str__(self):
-        return self.phone
+        return "{} {} - {}".format(self.first_name, self.last_name, self.phone)

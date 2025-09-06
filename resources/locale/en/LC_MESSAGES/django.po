@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-15 16:40+0500\n"
+"POT-Creation-Date: 2025-09-06 15:24+0500\n"
 "PO-Revision-Date: 2024-02-09 15:09+0500\n"
 "Last-Translator:   <admin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,34 +16,358 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Translated-Using: django-rosetta 0.10.0\n"
 
-#: config/settings/common.py:148
+#: config/conf/navigation.py:9
+msgid "Home page"
+msgstr "Bosh sahifa"
+
+#: config/conf/navigation.py:16
+msgid "Auth"
+msgstr ""
+
+#: config/conf/navigation.py:20
+msgid "Users"
+msgstr "Foydalanuvchilar"
+
+#: config/conf/navigation.py:25
+msgid "Group"
+msgstr "Guruh"
+
+#: config/conf/navigation.py:32
+msgid "Dashboard"
+msgstr ""
+
+#: config/conf/navigation.py:36
+msgid "Maxsulot"
+msgstr ""
+
+#: config/conf/navigation.py:41
+msgid "Karegoriya"
+msgstr ""
+
+#: config/conf/navigation.py:46
+msgid "Teglar"
+msgstr ""
+
+#: config/conf/navigation.py:51
+msgid "Rang"
+msgstr ""
+
+#: config/conf/navigation.py:56
+msgid "O'lcham"
+msgstr ""
+
+#: config/conf/navigation.py:61
+msgid "Buyurtmalar"
+msgstr ""
+
+#: config/conf/navigation.py:68
+msgid "Address"
+msgstr "Manzil"
+
+#: config/conf/navigation.py:72
+msgid "Davlat"
+msgstr ""
+
+#: config/conf/navigation.py:77
+msgid "Shaxar/Tuman"
+msgstr ""
+
+#: config/conf/unfold.py:10
+msgid "Development"
+msgstr ""
+
+#: config/conf/unfold.py:12
+msgid "Production"
+msgstr ""
+
+#: config/settings/common.py:134
 msgid "Russia"
 msgstr ""
 
-#: config/settings/common.py:149
+#: config/settings/common.py:135
 msgid "English"
 msgstr ""
 
-#: config/settings/common.py:150
+#: config/settings/common.py:136
 msgid "Uzbek"
 msgstr ""
 
-#: core/http/admin/index.py:20
-msgid "Custom Field"
+#: core/apps/accounts/admin/user.py:22
+msgid "Personal info"
 msgstr ""
 
-#: core/http/tasks/index.py:13
+#: core/apps/accounts/admin/user.py:24
+msgid "Permissions"
+msgstr ""
+
+#: core/apps/accounts/admin/user.py:36
+msgid "Important dates"
+msgstr ""
+
+#: core/apps/accounts/choices/user.py:10
+msgid "Superuser"
+msgstr ""
+
+#: core/apps/accounts/choices/user.py:11
+msgid "Admin"
+msgstr ""
+
+#: core/apps/accounts/choices/user.py:12
+msgid "User"
+msgstr ""
+
+#: core/apps/accounts/models/address.py:7
+#: core/apps/accounts/models/address.py:25 core/apps/api/models/product.py:12
+#: core/apps/api/models/product.py:64 core/apps/api/models/product.py:82
+#: core/apps/api/models/product.py:100 core/apps/api/models/product.py:118
+msgid "name"
+msgstr "nom"
+
+#: core/apps/accounts/models/address.py:20
+msgid "CountryModel"
+msgstr "Davlat"
+
+#: core/apps/accounts/models/address.py:21
+msgid "CountryModels"
+msgstr "Davlatlar"
+
+#: core/apps/accounts/models/address.py:40
+msgid "RegionModel"
+msgstr "Shaxar"
+
+#: core/apps/accounts/models/address.py:41
+msgid "RegionModels"
+msgstr "Shaxarlar"
+
+#: core/apps/accounts/serializers/auth.py:21
+msgid "Phone number already registered."
+msgstr "To'lefon nomer ro'yhatdan o'tgan"
+
+#: core/apps/accounts/serializers/auth.py:53
+#: core/apps/accounts/serializers/auth.py:64
+msgid "User does not exist"
+msgstr "Foydalanuvchi mavjud emas"
+
+#: core/apps/accounts/tasks/sms.py:21
 #, python-format
 msgid "Sizning Tasdiqlash ko'dingiz: %(code)s"
 msgstr ""
 
-#: resources/templates/user/home.html:18
+#: core/apps/accounts/views/auth.py:59 core/apps/accounts/views/auth.py:91
+#: core/apps/accounts/views/auth.py:115
+#, python-format
+msgid "Sms %(phone)s raqamiga yuborildi"
+msgstr ""
+
+#: core/apps/accounts/views/auth.py:75
+msgid "Tasdiqlash ko'di qabul qilindi"
+msgstr ""
+
+#: core/apps/accounts/views/auth.py:152
+msgid "Invalid token"
+msgstr "Token xato"
+
+#: core/apps/accounts/views/auth.py:156
+msgid "password updated"
+msgstr ""
+
+#: core/apps/accounts/views/auth.py:181
+msgid "Malumotlar yangilandi"
+msgstr ""
+
+#: core/apps/accounts/views/auth.py:208
+msgid "invalida password"
+msgstr ""
+
+#: core/apps/api/admin/order.py:48
+msgid "pending"
+msgstr "Kutilmoqda"
+
+#: core/apps/api/admin/order.py:49 core/apps/api/models/order.py:16
+msgid "done"
+msgstr "Bajarildi"
+
+#: core/apps/api/admin/order.py:50 core/apps/api/models/order.py:17
+msgid "canceled"
+msgstr "Bekor qilindi"
+
+#: core/apps/api/admin/order.py:52 core/apps/api/models/order.py:20
+msgid "status"
+msgstr "Holati"
+
+#: core/apps/api/admin/order.py:57 core/apps/api/models/order.py:21
+msgid "payment status"
+msgstr "To'lov holati"
+
+#: core/apps/api/admin/order.py:61 core/apps/api/models/order.py:47
+#: core/apps/api/models/product.py:17 core/apps/api/models/product.py:48
+msgid "amount"
+msgstr "Summa"
+
+#: core/apps/api/models/order.py:14
+msgid "new"
+msgstr ""
+
+#: core/apps/api/models/order.py:15
+msgid "delivering"
+msgstr ""
+
+#: core/apps/api/models/order.py:38
+msgid "OrderModel"
+msgstr "Buyurtma"
+
+#: core/apps/api/models/order.py:39
+msgid "OrderModels"
+msgstr "Buyurtmalar"
+
+#: core/apps/api/models/order.py:45
+msgid "count"
+msgstr "soni"
+
+#: core/apps/api/models/order.py:64
+msgid "ItemModel"
+msgstr "Buyurtmadagi maxulot"
+
+#: core/apps/api/models/order.py:65
+msgid "ItemModels"
+msgstr "Buyurtmadagi maxulotlar"
+
+#: core/apps/api/models/product.py:13
+msgid "desc"
+msgstr "Tavsif"
+
+#: core/apps/api/models/product.py:14 core/apps/api/models/product.py:160
+msgid "image"
+msgstr "rasm"
+
+#: core/apps/api/models/product.py:39
+msgid "ProductModel"
+msgstr "Maxsulot"
+
+#: core/apps/api/models/product.py:40
+msgid "ProductModels"
+msgstr "Maxsulotlar"
+
+#: core/apps/api/models/product.py:47
+msgid "quantity"
+msgstr "soni"
+
+#: core/apps/api/models/product.py:49
+msgid "sku"
+msgstr ""
+
+#: core/apps/api/models/product.py:77
+msgid "TagModel"
+msgstr "Teg"
+
+#: core/apps/api/models/product.py:78
+msgid "TagModels"
+msgstr "Teglar"
+
+#: core/apps/api/models/product.py:95
+msgid "CategoryModel"
+msgstr "Kategoriya"
+
+#: core/apps/api/models/product.py:96
+msgid "CategoryModels"
+msgstr "Ktegoriyalar"
+
+#: core/apps/api/models/product.py:113
+msgid "ColorModel"
+msgstr "Rang"
+
+#: core/apps/api/models/product.py:114
+msgid "ColorModels"
+msgstr "Ranglar"
+
+#: core/apps/api/models/product.py:131
+msgid "SizeModel"
+msgstr "O'lcham"
+
+#: core/apps/api/models/product.py:132
+msgid "SizeModels"
+msgstr "O'lchamlar"
+
+#: core/apps/api/models/product.py:138
+msgid "quantiry"
+msgstr "soni"
+
+#: core/apps/api/models/product.py:154
+msgid "BasketModel"
+msgstr "Korzinka"
+
+#: core/apps/api/models/product.py:155
+msgid "BasketModels"
+msgstr "Korzinkalar"
+
+#: core/apps/api/models/product.py:174
+msgid "ProductimageModel"
+msgstr "Maxsulot rasmi"
+
+#: core/apps/api/models/product.py:175
+msgid "ProductimageModels"
+msgstr "Maxsulot rasmlari"
+
+#: core/apps/shared/models/settings.py:8 core/apps/shared/models/settings.py:22
+msgid "key"
+msgstr "kalit"
+
+#: core/apps/shared/models/settings.py:9
+msgid "is public"
+msgstr "ochiq"
+
+#: core/apps/shared/models/settings.py:10
+msgid "description"
+msgstr "tavsif"
+
+#: core/apps/shared/models/settings.py:14
+#: core/apps/shared/models/settings.py:15
+msgid "Settings"
+msgstr "Sozlamalar"
+
+#: core/apps/shared/models/settings.py:20
+msgid "settings"
+msgstr "Sozlamalar"
+
+#: core/apps/shared/models/settings.py:24
+#: core/apps/shared/models/settings.py:25
+msgid "value"
+msgstr "qiymat"
+
+#: core/apps/shared/models/settings.py:30
+#: core/apps/shared/models/settings.py:31
+msgid "Options"
+msgstr "Turlari"
+
+#: core/apps/shared/utils/settings.py:16
+msgid "USD kursi kiritilmagan iltimos adminga murojat qiling"
+msgstr ""
+
+#: core/services/user.py:39
+msgid "Qayta sms yuborish uchun kuting: {}"
+msgstr ""
+
+#: core/services/user.py:41
+msgid "Serverda xatolik yuz berdi"
+msgstr ""
+
+#: resources/templates/admin/index.html:13
+msgid "Django site admin"
+msgstr ""
+
+#: resources/templates/admin/index.html:19
+msgid "Django administration"
+msgstr ""
+
+#: resources/templates/user/home.html:21
 msgid "Django"
 msgstr ""
 
-#: resources/templates/user/home.html:19
+#: resources/templates/user/home.html:22
 msgid "Assalomu aleykum"
 msgstr ""

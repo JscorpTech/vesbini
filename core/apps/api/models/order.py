@@ -11,8 +11,10 @@ User = get_user_model()
 
 class OrderModel(AbstractBaseModel):
     STATUS = (
-        ("pending", _("pending")),
+        ("new", _("new")),
+        ("delivering", _("delivering")),
         ("done", _("done")),
+        ("canceled", _("canceled")),
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(verbose_name=_("status"), max_length=255, choices=STATUS, default="pending")

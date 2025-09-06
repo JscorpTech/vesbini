@@ -9,6 +9,7 @@ class CustomUserAdmin(admin.UserAdmin, ModelAdmin):
     change_password_form = AdminPasswordChangeForm
     # add_form = UserCreationForm
     form = UserChangeForm
+    search_fields = ["first_name", "phone", "last_name", "username"]
     list_display = (
         "first_name",
         "last_name",

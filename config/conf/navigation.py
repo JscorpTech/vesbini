@@ -43,6 +43,11 @@ PAGES = [
                 "link": reverse_lazy("admin:api_categorymodel_changelist"),
             },
             {
+                "title": _("Teglar"),
+                "icon": "numbers",
+                "link": reverse_lazy("admin:api_tagmodel_changelist"),
+            },
+            {
                 "title": _("Rang"),
                 "icon": "format_color_fill",
                 "link": reverse_lazy("admin:api_colormodel_changelist"),
