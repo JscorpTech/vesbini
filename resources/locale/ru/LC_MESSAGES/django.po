@@ -211,7 +211,7 @@ msgstr "Summa"
 
 #: core/apps/api/models/order.py:14
 msgid "new"
-msgstr ""
+msgstr "Yangi"
 
 #: core/apps/api/models/order.py:15
 msgid "delivering"
