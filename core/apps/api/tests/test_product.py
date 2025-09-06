@@ -223,6 +223,7 @@ class BasketTest(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.instance = self._create_data()
+        self.client.force_authenticate(self.instance.user)
         self.urls = {
             "list": reverse("basket-list"),
             "retrieve": reverse("basket-detail", kwargs={"pk": self.instance.pk}),
