@@ -9,7 +9,14 @@ from unfold.contrib.filters.admin import (
 from unfold.contrib.forms.widgets import WysiwygWidget
 
 from core.apps.api.models import BasketModel, CategoryModel, ColorModel, ProductModel, SizeModel, TagModel
-from core.apps.api.models.product import ProductVariantModel
+from core.apps.api.models.product import ProductImageModel, ProductVariantModel
+
+
+class ProductImageInline(TabularInline):
+    model = ProductImageModel
+    tab = True
+    extra = 1
+    autocomplete_fields = ["color"]
 
 
 class ProductVariantInline(TabularInline):
@@ -27,7 +34,7 @@ class ProductVariantInline(TabularInline):
 
 @admin.register(ProductModel)
 class ProductAdmin(TabbedTranslationAdmin, ModelAdmin):
-    inlines = [ProductVariantInline]
+    inlines = [ProductVariantInline, ProductImageInline]
     list_filter_submit = True
     formfield_overrides = {
         models.TextField: {

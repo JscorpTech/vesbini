@@ -1,3 +1,5 @@
+from operator import imatmul
+
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -151,3 +153,23 @@ class BasketModel(AbstractBaseModel):
         db_table = "basket"
         verbose_name = _("BasketModel")
         verbose_name_plural = _("BasketModels")
+
+
+class ProductImageModel(AbstractBaseModel):
+    product = models.ForeignKey("ProductModel", on_delete=models.CASCADE, related_name="images")
+    image = models.FileField(_("image"), upload_to="product/")
+    color = models.ForeignKey("ColorModel", on_delete=models.SET_NULL, blank=True, null=True)
+
+    def __str__(self):
+        return str(self.image.name)
+
+    @classmethod
+    def _create_fake(cls):
+        return cls.objects.create(
+            image="default.jpg",
+        )
+
+    class Meta:
+        db_table = "productimage"
+        verbose_name = _("ProductimageModel")
+        verbose_name_plural = _("ProductimageModels")

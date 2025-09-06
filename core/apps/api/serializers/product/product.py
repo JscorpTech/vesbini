@@ -2,6 +2,7 @@ from django.db import models
 from rest_framework import serializers
 
 from core.apps.api.models import ProductModel
+from core.apps.api.serializers.product.productimage import ListProductImageSerializer
 from core.apps.api.serializers.product.variant import RetrieveProductVariantSerializer
 
 
@@ -48,6 +49,7 @@ class MiniProductSerializer(BaseProductSerializer):
 
 class RetrieveProductSerializer(BaseProductSerializer):
     variants = RetrieveProductVariantSerializer(many=True)
+    images = ListProductImageSerializer(many=True)
 
     class Meta(BaseProductSerializer.Meta):
         fields = [
@@ -56,6 +58,7 @@ class RetrieveProductSerializer(BaseProductSerializer):
             "desc",
             "image",
             "variants",
+            "images",
         ]
 
 
