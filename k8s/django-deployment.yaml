@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: django 
-          image: "jscorptech/vesbini:93"
+          image: "jscorptech/vesbini:94.0.0"
           ports:
             - containerPort: 8000 
           volumeMounts:
