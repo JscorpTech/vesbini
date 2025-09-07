@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-07 14:32+0500\n"
+"POT-Creation-Date: 2025-09-07 17:59+0500\n"
 "PO-Revision-Date: 2024-02-09 15:09+0500\n"
 "Last-Translator:   <admin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,7 +83,7 @@ msgstr ""
 
 #: config/conf/navigation.py:88 core/apps/api/models/order.py:49
 msgid "sklad"
-msgstr ""
+msgstr "Ombor"
 
 #: config/conf/navigation.py:95
 msgid "Boshqa"
@@ -135,7 +135,7 @@ msgstr ""
 
 #: core/apps/accounts/admin/user.py:55
 msgid "balance"
-msgstr ""
+msgstr "hisob"
 
 #: core/apps/accounts/choices/user.py:10
 msgid "Superuser"
@@ -151,9 +151,9 @@ msgstr ""
 
 #: core/apps/accounts/models/address.py:7
 #: core/apps/accounts/models/address.py:25 core/apps/api/models/moysklad.py:7
-#: core/apps/api/models/product.py:12 core/apps/api/models/product.py:66
-#: core/apps/api/models/product.py:84 core/apps/api/models/product.py:102
-#: core/apps/api/models/product.py:120
+#: core/apps/api/models/product.py:12 core/apps/api/models/product.py:67
+#: core/apps/api/models/product.py:85 core/apps/api/models/product.py:103
+#: core/apps/api/models/product.py:121
 msgid "name"
 msgstr "nom"
 
@@ -223,7 +223,7 @@ msgstr "Yangi"
 
 #: core/apps/api/admin/order.py:49 core/apps/api/models/order.py:16
 msgid "delivering"
-msgstr ""
+msgstr "Yetkazilmoqda"
 
 #: core/apps/api/admin/order.py:50 core/apps/api/models/order.py:17
 msgid "done"
@@ -233,7 +233,7 @@ msgstr "Bajarildi"
 msgid "canceled"
 msgstr "Bekor qilindi"
 
-#: core/apps/api/admin/order.py:53 core/apps/api/admin/product.py:71
+#: core/apps/api/admin/order.py:53 core/apps/api/admin/product.py:72
 #: core/apps/api/models/order.py:21 core/apps/api/models/product.py:14
 msgid "status"
 msgstr "Holati"
@@ -242,14 +242,14 @@ msgstr "Holati"
 msgid "payment status"
 msgstr "To'lov holati"
 
-#: core/apps/api/admin/order.py:62 core/apps/api/admin/product.py:75
+#: core/apps/api/admin/order.py:62 core/apps/api/admin/product.py:76
 #: core/apps/api/models/order.py:48 core/apps/api/models/product.py:18
 #: core/apps/api/models/product.py:49
 msgid "amount"
 msgstr "Summa"
 
-#: core/apps/api/models/moysklad.py:8
-msgid "moysklad id"
+#: core/apps/api/models/moysklad.py:8 core/apps/api/models/product.py:51
+msgid "href"
 msgstr ""
 
 #: core/apps/api/models/moysklad.py:9
@@ -270,15 +270,15 @@ msgstr "O'lchamlar"
 
 #: core/apps/api/models/moysklad.py:28
 msgid "mys id"
-msgstr ""
+msgstr "moysklad id"
 
 #: core/apps/api/models/moysklad.py:29
 msgid "is active"
-msgstr ""
+msgstr "aktiv"
 
 #: core/apps/api/models/moysklad.py:42
 msgid "RetailshiftModel"
-msgstr ""
+msgstr "Chakana savdo almashinuvi"
 
 #: core/apps/api/models/moysklad.py:43
 #, fuzzy
@@ -310,7 +310,7 @@ msgstr "Buyurtmadagi maxulotlar"
 msgid "desc"
 msgstr "Tavsif"
 
-#: core/apps/api/models/product.py:15 core/apps/api/models/product.py:162
+#: core/apps/api/models/product.py:15 core/apps/api/models/product.py:163
 msgid "image"
 msgstr "rasm"
 
@@ -328,57 +328,57 @@ msgstr "soni"
 
 #: core/apps/api/models/product.py:50
 msgid "sku"
-msgstr ""
+msgstr "kod"
 
-#: core/apps/api/models/product.py:79
+#: core/apps/api/models/product.py:80
 msgid "TagModel"
 msgstr "Teg"
 
-#: core/apps/api/models/product.py:80
+#: core/apps/api/models/product.py:81
 msgid "TagModels"
 msgstr "Teglar"
 
-#: core/apps/api/models/product.py:97
+#: core/apps/api/models/product.py:98
 msgid "CategoryModel"
 msgstr "Kategoriya"
 
-#: core/apps/api/models/product.py:98
+#: core/apps/api/models/product.py:99
 msgid "CategoryModels"
 msgstr "Ktegoriyalar"
 
-#: core/apps/api/models/product.py:115
+#: core/apps/api/models/product.py:116
 msgid "ColorModel"
 msgstr "Rang"
 
-#: core/apps/api/models/product.py:116
+#: core/apps/api/models/product.py:117
 msgid "ColorModels"
 msgstr "Ranglar"
 
-#: core/apps/api/models/product.py:133
+#: core/apps/api/models/product.py:134
 msgid "SizeModel"
 msgstr "O'lcham"
 
-#: core/apps/api/models/product.py:134
+#: core/apps/api/models/product.py:135
 msgid "SizeModels"
 msgstr "O'lchamlar"
 
-#: core/apps/api/models/product.py:140
+#: core/apps/api/models/product.py:141
 msgid "quantiry"
 msgstr "soni"
 
-#: core/apps/api/models/product.py:156
+#: core/apps/api/models/product.py:157
 msgid "BasketModel"
 msgstr "Korzinka"
 
-#: core/apps/api/models/product.py:157
+#: core/apps/api/models/product.py:158
 msgid "BasketModels"
 msgstr "Korzinkalar"
 
-#: core/apps/api/models/product.py:176
+#: core/apps/api/models/product.py:177
 msgid "ProductimageModel"
 msgstr "Maxsulot rasmi"
 
-#: core/apps/api/models/product.py:177
+#: core/apps/api/models/product.py:178
 msgid "ProductimageModels"
 msgstr "Maxsulot rasmlari"
 
