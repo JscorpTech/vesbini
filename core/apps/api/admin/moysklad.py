@@ -2,7 +2,7 @@ from django.contrib import admin
 from unfold.admin import ModelAdmin
 from unfold.decorators import display
 
-from core.apps.api.models import RetailshiftModel, StoreModel
+from core.apps.api.models import RetailShiftModel, StoreModel
 
 
 @admin.register(StoreModel)
@@ -14,7 +14,7 @@ class StoreAdmin(ModelAdmin):
         return obj.default
 
 
-@admin.register(RetailshiftModel)
+@admin.register(RetailShiftModel)
 class RetailshiftAdmin(ModelAdmin):
     list_display = (
         "id",

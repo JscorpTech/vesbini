@@ -24,8 +24,8 @@ class StoreModel(AbstractBaseModel):
         verbose_name_plural = _("StoreModels")
 
 
-class RetailshiftModel(AbstractBaseModel):
-    mys_id = models.CharField(_("mys id"), max_length=255)
+class RetailShiftModel(AbstractBaseModel):
+    href = models.CharField(_("mys id"), max_length=255)
     is_active = models.BooleanField(_("is active"), default=False)
 
     def __str__(self):

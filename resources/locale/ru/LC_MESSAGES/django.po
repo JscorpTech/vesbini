@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-06 15:24+0500\n"
+"POT-Creation-Date: 2025-09-07 14:32+0500\n"
 "PO-Revision-Date: 2024-02-09 15:09+0500\n"
 "Last-Translator:   <admin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,6 +77,22 @@ msgstr ""
 msgid "Shaxar/Tuman"
 msgstr ""
 
+#: config/conf/navigation.py:84
+msgid "Moysklad"
+msgstr ""
+
+#: config/conf/navigation.py:88 core/apps/api/models/order.py:49
+msgid "sklad"
+msgstr ""
+
+#: config/conf/navigation.py:95
+msgid "Boshqa"
+msgstr ""
+
+#: config/conf/navigation.py:99 core/apps/shared/models/settings.py:20
+msgid "settings"
+msgstr "Sozlamalar"
+
 #: config/conf/unfold.py:10
 msgid "Development"
 msgstr ""
@@ -85,28 +101,40 @@ msgstr ""
 msgid "Production"
 msgstr ""
 
-#: config/settings/common.py:134
+#: config/settings/common.py:135
 msgid "Russia"
 msgstr ""
 
-#: config/settings/common.py:135
+#: config/settings/common.py:136
 msgid "English"
 msgstr ""
 
-#: config/settings/common.py:136
+#: config/settings/common.py:137
 msgid "Uzbek"
 msgstr ""
 
-#: core/apps/accounts/admin/user.py:22
+#: core/apps/accounts/admin/user.py:17
+msgid "Profile"
+msgstr ""
+
+#: core/apps/accounts/admin/user.py:18
+msgid "Profiles"
+msgstr ""
+
+#: core/apps/accounts/admin/user.py:38
 msgid "Personal info"
 msgstr ""
 
-#: core/apps/accounts/admin/user.py:24
+#: core/apps/accounts/admin/user.py:40
 msgid "Permissions"
 msgstr ""
 
-#: core/apps/accounts/admin/user.py:36
+#: core/apps/accounts/admin/user.py:52
 msgid "Important dates"
+msgstr ""
+
+#: core/apps/accounts/admin/user.py:55
+msgid "balance"
 msgstr ""
 
 #: core/apps/accounts/choices/user.py:10
@@ -122,9 +150,10 @@ msgid "User"
 msgstr ""
 
 #: core/apps/accounts/models/address.py:7
-#: core/apps/accounts/models/address.py:25 core/apps/api/models/product.py:12
-#: core/apps/api/models/product.py:64 core/apps/api/models/product.py:82
-#: core/apps/api/models/product.py:100 core/apps/api/models/product.py:118
+#: core/apps/accounts/models/address.py:25 core/apps/api/models/moysklad.py:7
+#: core/apps/api/models/product.py:12 core/apps/api/models/product.py:66
+#: core/apps/api/models/product.py:84 core/apps/api/models/product.py:102
+#: core/apps/api/models/product.py:120
 msgid "name"
 msgstr "nom"
 
@@ -143,6 +172,10 @@ msgstr "Shaxar"
 #: core/apps/accounts/models/address.py:41
 msgid "RegionModels"
 msgstr "Shaxarlar"
+
+#: core/apps/accounts/models/user.py:42
+msgid "qrcode"
+msgstr ""
 
 #: core/apps/accounts/serializers/auth.py:21
 msgid "Phone number already registered."
@@ -184,56 +217,92 @@ msgstr ""
 msgid "invalida password"
 msgstr ""
 
-#: core/apps/api/admin/order.py:48
-msgid "pending"
-msgstr "Kutilmoqda"
-
-#: core/apps/api/admin/order.py:49 core/apps/api/models/order.py:16
-msgid "done"
-msgstr "Bajarildi"
-
-#: core/apps/api/admin/order.py:50 core/apps/api/models/order.py:17
-msgid "canceled"
-msgstr "Bekor qilindi"
-
-#: core/apps/api/admin/order.py:52 core/apps/api/models/order.py:20
-msgid "status"
-msgstr "Holati"
-
-#: core/apps/api/admin/order.py:57 core/apps/api/models/order.py:21
-msgid "payment status"
-msgstr "To'lov holati"
-
-#: core/apps/api/admin/order.py:61 core/apps/api/models/order.py:47
-#: core/apps/api/models/product.py:17 core/apps/api/models/product.py:48
-msgid "amount"
-msgstr "Summa"
-
-#: core/apps/api/models/order.py:14
+#: core/apps/api/admin/order.py:48 core/apps/api/models/order.py:15
 msgid "new"
 msgstr "Yangi"
 
-#: core/apps/api/models/order.py:15
+#: core/apps/api/admin/order.py:49 core/apps/api/models/order.py:16
 msgid "delivering"
 msgstr ""
 
-#: core/apps/api/models/order.py:38
+#: core/apps/api/admin/order.py:50 core/apps/api/models/order.py:17
+msgid "done"
+msgstr "Bajarildi"
+
+#: core/apps/api/admin/order.py:51 core/apps/api/models/order.py:18
+msgid "canceled"
+msgstr "Bekor qilindi"
+
+#: core/apps/api/admin/order.py:53 core/apps/api/admin/product.py:71
+#: core/apps/api/models/order.py:21 core/apps/api/models/product.py:14
+msgid "status"
+msgstr "Holati"
+
+#: core/apps/api/admin/order.py:58 core/apps/api/models/order.py:22
+msgid "payment status"
+msgstr "To'lov holati"
+
+#: core/apps/api/admin/order.py:62 core/apps/api/admin/product.py:75
+#: core/apps/api/models/order.py:48 core/apps/api/models/product.py:18
+#: core/apps/api/models/product.py:49
+msgid "amount"
+msgstr "Summa"
+
+#: core/apps/api/models/moysklad.py:8
+msgid "moysklad id"
+msgstr ""
+
+#: core/apps/api/models/moysklad.py:9
+msgid "default"
+msgstr ""
+
+#: core/apps/api/models/moysklad.py:23
+#, fuzzy
+#| msgid "SizeModel"
+msgid "StoreModel"
+msgstr "O'lcham"
+
+#: core/apps/api/models/moysklad.py:24
+#, fuzzy
+#| msgid "SizeModels"
+msgid "StoreModels"
+msgstr "O'lchamlar"
+
+#: core/apps/api/models/moysklad.py:28
+msgid "mys id"
+msgstr ""
+
+#: core/apps/api/models/moysklad.py:29
+msgid "is active"
+msgstr ""
+
+#: core/apps/api/models/moysklad.py:42
+msgid "RetailshiftModel"
+msgstr ""
+
+#: core/apps/api/models/moysklad.py:43
+#, fuzzy
+#| msgid "BasketModels"
+msgid "RetailshiftModels"
+msgstr "Korzinkalar"
+
+#: core/apps/api/models/order.py:39
 msgid "OrderModel"
 msgstr "Buyurtma"
 
-#: core/apps/api/models/order.py:39
+#: core/apps/api/models/order.py:40
 msgid "OrderModels"
 msgstr "Buyurtmalar"
 
-#: core/apps/api/models/order.py:45
+#: core/apps/api/models/order.py:46
 msgid "count"
 msgstr "soni"
 
-#: core/apps/api/models/order.py:64
+#: core/apps/api/models/order.py:66
 msgid "ItemModel"
 msgstr "Buyurtmadagi maxulot"
 
-#: core/apps/api/models/order.py:65
+#: core/apps/api/models/order.py:67
 msgid "ItemModels"
 msgstr "Buyurtmadagi maxulotlar"
 
@@ -241,75 +310,75 @@ msgstr "Buyurtmadagi maxulotlar"
 msgid "desc"
 msgstr "Tavsif"
 
-#: core/apps/api/models/product.py:14 core/apps/api/models/product.py:160
+#: core/apps/api/models/product.py:15 core/apps/api/models/product.py:162
 msgid "image"
 msgstr "rasm"
 
-#: core/apps/api/models/product.py:39
+#: core/apps/api/models/product.py:40
 msgid "ProductModel"
 msgstr "Maxsulot"
 
-#: core/apps/api/models/product.py:40
+#: core/apps/api/models/product.py:41
 msgid "ProductModels"
 msgstr "Maxsulotlar"
 
-#: core/apps/api/models/product.py:47
+#: core/apps/api/models/product.py:48
 msgid "quantity"
 msgstr "soni"
 
-#: core/apps/api/models/product.py:49
+#: core/apps/api/models/product.py:50
 msgid "sku"
 msgstr ""
 
-#: core/apps/api/models/product.py:77
+#: core/apps/api/models/product.py:79
 msgid "TagModel"
 msgstr "Teg"
 
-#: core/apps/api/models/product.py:78
+#: core/apps/api/models/product.py:80
 msgid "TagModels"
 msgstr "Teglar"
 
-#: core/apps/api/models/product.py:95
+#: core/apps/api/models/product.py:97
 msgid "CategoryModel"
 msgstr "Kategoriya"
 
-#: core/apps/api/models/product.py:96
+#: core/apps/api/models/product.py:98
 msgid "CategoryModels"
 msgstr "Ktegoriyalar"
 
-#: core/apps/api/models/product.py:113
+#: core/apps/api/models/product.py:115
 msgid "ColorModel"
 msgstr "Rang"
 
-#: core/apps/api/models/product.py:114
+#: core/apps/api/models/product.py:116
 msgid "ColorModels"
 msgstr "Ranglar"
 
-#: core/apps/api/models/product.py:131
+#: core/apps/api/models/product.py:133
 msgid "SizeModel"
 msgstr "O'lcham"
 
-#: core/apps/api/models/product.py:132
+#: core/apps/api/models/product.py:134
 msgid "SizeModels"
 msgstr "O'lchamlar"
 
-#: core/apps/api/models/product.py:138
+#: core/apps/api/models/product.py:140
 msgid "quantiry"
 msgstr "soni"
 
-#: core/apps/api/models/product.py:154
+#: core/apps/api/models/product.py:156
 msgid "BasketModel"
 msgstr "Korzinka"
 
-#: core/apps/api/models/product.py:155
+#: core/apps/api/models/product.py:157
 msgid "BasketModels"
 msgstr "Korzinkalar"
 
-#: core/apps/api/models/product.py:174
+#: core/apps/api/models/product.py:176
 msgid "ProductimageModel"
 msgstr "Maxsulot rasmi"
 
-#: core/apps/api/models/product.py:175
+#: core/apps/api/models/product.py:177
 msgid "ProductimageModels"
 msgstr "Maxsulot rasmlari"
 
@@ -328,10 +397,6 @@ msgstr "tavsif"
 #: core/apps/shared/models/settings.py:14
 #: core/apps/shared/models/settings.py:15
 msgid "Settings"
-msgstr "Sozlamalar"
-
-#: core/apps/shared/models/settings.py:20
-msgid "settings"
 msgstr "Sozlamalar"
 
 #: core/apps/shared/models/settings.py:24
@@ -371,3 +436,6 @@ msgstr ""
 #: resources/templates/user/home.html:22
 msgid "Assalomu aleykum"
 msgstr ""
+
+#~ msgid "pending"
+#~ msgstr "Kutilmoqda"
