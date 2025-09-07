@@ -2,6 +2,7 @@ from django.db.transaction import atomic
 from rest_framework import serializers
 
 from core.apps.api.models import OrderModel
+from core.apps.api.models.moysklad import StoreModel
 from core.apps.api.models.order import ItemModel
 from core.apps.api.models.product import BasketModel
 from core.apps.api.serializers.order.item import ListItemSerializer
@@ -49,6 +50,7 @@ class CreateOrderSerializer(BaseOrderSerializer):
                     variant=item.variant,
                     count=item.count,
                     amount=item.variant.amount,
+                    store=StoreModel.objects.filter(default=True).first(),
                 )
                 item.delete()
         return order

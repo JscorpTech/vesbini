@@ -15,6 +15,8 @@ class MoySklad:
         )
         self.login = env.str("MOYSKLAD_LOGIN")
         self.password = env.str("MOYSKLAD_PASSWORD")
+        self.store = "2ddf3506-e51d-11ee-0a80-1409003ab718"
+        self.org = "0122d460-8198-11f0-0a80-03bb002d25d7"
 
     def on_request(self, request: httpx.Request):
         request.headers["Accept-Encoding"] = "gzip"
