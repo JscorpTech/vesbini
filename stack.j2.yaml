@@ -104,6 +104,70 @@ services:
         max-size: "10m"
         max-file: "3"
 
+  celery-worker:
+    image: "{{ username }}/{{ name }}:{{ tag }}" 
+    environment:
+      - SCRIPT=celery-worker.sh
+      - PYTHONPYCACHEPREFIX=/var/cache/pycache
+    networks:
+      - vesbini
+    volumes:
+      - logs:/code/resources/logs/
+      - media:/code/resources/media/
+      - static:/code/resources/staticfiles/
+      - pycache:/var/cache/pycache
+    tmpfs:
+      - /tmp
+      - /run
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any 
+      update_config:
+        failure_action: rollback 
+        monitor: 30s
+        delay: 30s
+        max_failure_ratio: 0.2
+        parallelism: 1
+        order: start-first
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  celery-beat:
+    image: "{{ username }}/{{ name }}:{{ tag }}" 
+    environment:
+      - SCRIPT=celery-beat.sh
+      - PYTHONPYCACHEPREFIX=/var/cache/pycache
+    networks:
+      - vesbini
+    volumes:
+      - logs:/code/resources/logs/
+      - media:/code/resources/media/
+      - static:/code/resources/staticfiles/
+      - pycache:/var/cache/pycache
+    tmpfs:
+      - /tmp
+      - /run
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any 
+      update_config:
+        failure_action: rollback 
+        monitor: 30s
+        delay: 30s
+        max_failure_ratio: 0.2
+        parallelism: 1
+        order: start-first
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
   nginx:
     image: nginx:1.27-alpine
     ports:

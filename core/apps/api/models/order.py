@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.forms import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django_core.models import AbstractBaseModel
 
@@ -45,6 +46,7 @@ class ItemModel(AbstractBaseModel):
     count = models.BigIntegerField(_("count"), default=1)
     variant = models.ForeignKey("ProductVariantModel", on_delete=models.SET_NULL, null=True, related_name="items")
     amount = models.BigIntegerField(_("amount"), default=0)
+    store = models.ForeignKey("StoreModel", verbose_name=_("sklad"), on_delete=models.SET_NULL, null=True, blank=False)
 
     def __str__(self):
         return str(self.pk)

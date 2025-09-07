@@ -80,4 +80,26 @@ PAGES = [
             },
         ],
     },
+    {
+        "title": _("Moysklad"),
+        "separator": True,  # Top border
+        "items": [
+            {
+                "title": _("sklad"),
+                "icon": "store",
+                "link": reverse_lazy("admin:api_storemodel_changelist"),
+            },
+        ],
+    },
+    {
+        "title": _("Boshqa"),
+        "separator": True,  # Top border
+        "items": [
+            {
+                "title": _("settings"),
+                "icon": "settings",
+                "link": reverse_lazy("admin:shared_settingsmodel_changelist"),
+            },
+        ],
+    },
 ]
