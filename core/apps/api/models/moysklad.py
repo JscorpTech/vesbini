@@ -5,7 +5,7 @@ from django_core.models import AbstractBaseModel
 
 class StoreModel(AbstractBaseModel):
     name = models.CharField(verbose_name=_("name"), max_length=255)
-    moysklad_id = models.CharField(_("moysklad id"), max_length=255)
+    href = models.CharField(_("href"), max_length=255, null=True, blank=False)
     default = models.BooleanField(_("default"), default=False)
 
     def __str__(self):

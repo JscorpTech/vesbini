@@ -10,6 +10,11 @@ __pycache__/
 
 poetry.lock
 
+
+celerybeat-schedule-shm
+ celerybeat-schedule-wal
+
+
 # C extensions
 *.so
 
