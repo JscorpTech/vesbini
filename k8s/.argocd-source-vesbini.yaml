@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - jscorptech/vesbini:98.0.0
+  - jscorptech/vesbini:99.0.0
