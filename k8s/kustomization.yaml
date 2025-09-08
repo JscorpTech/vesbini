@@ -1,0 +1,10 @@
+
+resources:
+  - db-deployment.yaml
+  - db-service.yaml
+  - django-deployment.yaml
+  - django-service.yaml
+  - nginx-deployment.yaml
+  - nginx-service.yaml
+  - volume.yaml
+  - config.yaml
