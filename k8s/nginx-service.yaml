@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nginx 
-  namespace: flux-system
+  namespace: vesbini
 spec:
   type: NodePort
   selector:

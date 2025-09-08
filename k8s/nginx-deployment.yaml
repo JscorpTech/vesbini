@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx 
-  namespace: flux-system
+  namespace: vesbini
 spec:
   replicas: 2
   selector:
