@@ -13,12 +13,19 @@ pipeline {
     }
 
     stages {
-        stage("env"){
-            steps{
-                sh "printenv"
-                script{
-                    currentBuild.result = "ABORT"
-                    error("stop")
+        stage('Check Commit Message') {
+            steps {
+                script {
+                    def commitMsg = sh(
+                        script: "git log -1 --pretty=%B",
+                        returnStdout: true
+                    ).trim()
+                    
+                    if (commitMsg.contains("[ci skip]")) {
+                        echo "Commit message contains [ci skip], aborting pipeline 🚫"
+                        currentBuild.result = 'ABORTED'
+                        error("Pipeline aborted because of [ci skip]")
+                    }
                 }
             }
         }
