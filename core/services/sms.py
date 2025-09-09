@@ -1,9 +1,10 @@
 import random
 from datetime import datetime, timedelta
 
+from django_core import exceptions, models
+
 from config.env import env
 from core.apps.accounts.tasks.sms import SendConfirm
-from django_core import exceptions, models
 
 
 class SmsService:
@@ -11,9 +12,9 @@ class SmsService:
     def send_confirm(phone):
         # TODO: Deploy this change when deploying -> code = random.randint(1000, 9999) # noqa
         if env.bool("OTP_PROD", False):
-            code = "".joint(random.randint(0, 9) for _ in range(env.int("OTP_SIZE", 4)))
+            code = "".join(random.randint(0, 9) for _ in range(env.int("OTP_SIZE", 4)))
         else:
-            code = env.int("OTP_DEFAULT", 1111) 
+            code = env.int("OTP_DEFAULT", 1111)
 
         sms_confirm, status = models.SmsConfirm.objects.get_or_create(phone=phone, defaults={"code": code})
 
