@@ -1,6 +1,9 @@
 pipeline {
     agent any
 
+    when {
+        buildingTag()
+    }
     environment {
         PROD_ENV     = "/opt/env/.env.vesbini"
         IMAGE_NAME   = "vesbini"
@@ -13,22 +16,6 @@ pipeline {
     }
 
     stages {
-        stage('Check Commit Message') {
-            steps {
-                script {
-                    def commitMsg = sh(
-                        script: "git log -1 --pretty=%B",
-                        returnStdout: true
-                    ).trim()
-                    
-                    if (commitMsg.contains("[ci skip]")) {
-                        echo "Commit message contains [ci skip], aborting pipeline 🚫"
-                        currentBuild.result = 'ABORTED'
-                        error("Pipeline aborted because of [ci skip]")
-                    }
-                }
-            }
-        }
         stage('Checkout Code') {
             steps {
                 git branch: 'main', credentialsId: 'ssh', url: 'git@github.com:JscorpTech/vesbini.git'
