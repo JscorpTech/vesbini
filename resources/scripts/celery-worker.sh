@@ -12,6 +12,7 @@ while ! nc -z redis 6379; do
   echo "Waiting redis...."
 done
 
+python3 manage.py compilemessages
 celery -A config worker -l info
 
 exit $?
