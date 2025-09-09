@@ -189,7 +189,7 @@ msgstr "Foydalanuvchi mavjud emas"
 #: core/apps/accounts/tasks/sms.py:21
 #, python-format
 msgid "Sizning Tasdiqlash ko'dingiz: %(code)s"
-msgstr ""
+msgstr "@vesbini_miniapp_bot ga ro'yxatdan o'tish uchun tasdiqlash kodi: %(code)s"
 
 #: core/apps/accounts/views/auth.py:59 core/apps/accounts/views/auth.py:91
 #: core/apps/accounts/views/auth.py:115
