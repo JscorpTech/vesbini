@@ -104,7 +104,6 @@ class EskizService:
             "api_path": self.CONTACT,
             "data": data,
         }
-        print(data)
 
         return self.request(
             context["api_path"],
