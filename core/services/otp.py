@@ -1,4 +1,5 @@
 import requests
+
 from config.env import env
 
 
@@ -7,7 +8,7 @@ class ConsoleService:
     def __init__(self) -> None: ...
 
     def send_sms(self, phone_number, message):
-        
+
         print(phone_number, message)
 
 
@@ -41,6 +42,7 @@ class EskizService:
                 data=data,
                 headers=headers,
             )
+            print(response.json())
 
             if api_path == self.methods["auth_refresh"]:
                 if response.status_code == 200:
@@ -102,6 +104,7 @@ class EskizService:
             "api_path": self.CONTACT,
             "data": data,
         }
+        print(data)
 
         return self.request(
             context["api_path"],
