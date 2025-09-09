@@ -1,9 +1,6 @@
 pipeline {
     agent any
 
-    when {
-        buildingTag()
-    }
     environment {
         PROD_ENV     = "/opt/env/.env.vesbini"
         IMAGE_NAME   = "vesbini"
@@ -17,6 +14,9 @@ pipeline {
 
     stages {
         stage('Checkout Code') {
+            when{
+                buildingTag()
+            }
             steps {
                 git branch: 'main', credentialsId: 'ssh', url: 'git@github.com:JscorpTech/vesbini.git'
             }
