@@ -16,7 +16,7 @@ from core.apps.api.serializers.order import (
 
 @extend_schema(tags=["order"])
 class OrderView(BaseViewSetMixin, ModelViewSet):
-    queryset = OrderModel.objects.all()
+    queryset = OrderModel.objects.order_by("-id").all()
     serializer_class = ListOrderSerializer
     permission_classes = [IsAuthenticated]
 

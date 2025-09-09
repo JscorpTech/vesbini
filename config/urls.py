@@ -22,6 +22,7 @@ def home(request):
 urlpatterns = [
     path("", home),
     path("", include("core.apps.accounts.urls")),
+    path("payment/", include("core.apps.payment.urls")),
     path("api/", include("core.apps.api.urls")),
 ]
 
