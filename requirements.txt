@@ -48,3 +48,4 @@ boto3
 # INFO: my
 qrcode
 httpx
+click-pkg
