@@ -68,7 +68,7 @@ services:
         max-file: "3"
 
   web:
-    image: jscorptech/vesbini:128
+    image: jscorptech/vesbini:130
     environment:
       - SCRIPT=entrypoint.sh
       - PYTHONPYCACHEPREFIX=/var/cache/pycache
@@ -105,7 +105,7 @@ services:
         max-file: "3"
 
   celery-worker:
-    image: jscorptech/vesbini:128
+    image: jscorptech/vesbini:130
     environment:
       - SCRIPT=celery-worker.sh
       - PYTHONPYCACHEPREFIX=/var/cache/pycache
@@ -137,7 +137,7 @@ services:
         max-file: "3"
 
   celery-beat:
-    image: jscorptech/vesbini:128
+    image: jscorptech/vesbini:130
     environment:
       - SCRIPT=celery-beat.sh
       - PYTHONPYCACHEPREFIX=/var/cache/pycache
