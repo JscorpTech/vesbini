@@ -13,6 +13,12 @@ pipeline {
     }
 
     stages {
+        stage("env"){
+            steps{
+                sh "printenv"
+                error("stop")
+            }
+        }
         stage('Check Commit Message') {
             steps {
                 script {
