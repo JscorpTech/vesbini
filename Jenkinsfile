@@ -98,7 +98,7 @@ pipeline {
                         git config --global user.name "Jenkins"
                         git add stack.yaml
                         git commit -m "feat(swarm) Update image tag to ${BUILD_NUMBER} [ci skip]"
-                        git push origin main
+                        git push origin dev
                     """
                 }
 
