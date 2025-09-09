@@ -13,6 +13,15 @@ pipeline {
     }
 
     stages {
+        stage("env"){
+            steps{
+                sh "printenv"
+                script{
+                    currentBuild.result = "ABORT"
+                    error("stop")
+                }
+            }
+        }
         stage('Checkout Code') {
             steps {
                 git branch: 'main', credentialsId: 'ssh', url: 'git@github.com:JscorpTech/vesbini.git'
