@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 
 from django.contrib.auth import get_user_model, hashers
@@ -37,7 +38,8 @@ class UserService(sms.SmsService):
             return True
         except exceptions.SmsException as e:
             raise PermissionDenied(_("Qayta sms yuborish uchun kuting: {}").format(e.kwargs.get("expired")))
-        except Exception:
+        except Exception as e:
+            logging.error(e)
             raise PermissionDenied(_("Serverda xatolik yuz berdi"))
 
     def validate_user(self, user) -> dict:
