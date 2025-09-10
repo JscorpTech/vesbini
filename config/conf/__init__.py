@@ -6,6 +6,7 @@ from .click import *  # noqa
 from .cron import *  # noqa
 from .jwt import *  # noqa
 from .logs import *  # noqa
+from .payme import *  # noqa
 from .payment import *  # noqa
 from .rest_framework import *  # noqa
 from .spectacular import *  # noqa
