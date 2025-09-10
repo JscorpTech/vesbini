@@ -13,12 +13,6 @@ pipeline {
     }
 
     stages {
-        stage("env"){
-            steps{
-                sh "printenv"
-                error("stop")
-            }
-        }
         stage('Check Commit Message') {
             steps {
                 script {
@@ -100,9 +94,9 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
                         echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin
-                        docker tag ${IMAGE_NAME}:${PROD_TAG} ${DOCKER_USER}/${IMAGE_NAME}:${BUILD_NUMBER}
+                        docker tag ${IMAGE_NAME}:${PROD_TAG} ${DOCKER_USER}/${IMAGE_NAME}:${env.TAG_NAME}
                         docker tag ${IMAGE_NAME}:${PROD_TAG} ${DOCKER_USER}/${IMAGE_NAME}:${PROD_TAG}
-                        docker push ${DOCKER_USER}/${IMAGE_NAME}:${BUILD_NUMBER}
+                        docker push ${DOCKER_USER}/${IMAGE_NAME}:${env.TAG_NAME}
                         docker push ${DOCKER_USER}/${IMAGE_NAME}:${PROD_TAG}
                     '''
                 }
@@ -115,11 +109,11 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh """
-                        sed -i 's|image: ${DOCKER_USER}/${IMAGE_NAME}:.*|image: ${DOCKER_USER}/${IMAGE_NAME}:${BUILD_NUMBER}|' stack.yaml
+                        sed -i 's|image: ${DOCKER_USER}/${IMAGE_NAME}:.*|image: ${DOCKER_USER}/${IMAGE_NAME}:${env.TAG_NAME}|' stack.yaml
                         git config --global user.email "admin@jscorp.uz"
                         git config --global user.name "Jenkins"
                         git add stack.yaml
-                        git commit -m "feat(swarm) Update image tag to ${BUILD_NUMBER} [ci skip]"
+                        git commit -m "feat(swarm) Update image tag to ${env.TAG_NAME} [ci skip]"
                         git push origin main
                     """
                 }
