@@ -20,6 +20,7 @@ deploy-prod:
 	docker compose -f docker-compose.prod.yml exec web python manage.py makemigrations --noinput
 	docker compose -f docker-compose.prod.yml exec web python manage.py migrate
 
+
 logs:
 	docker compose logs -f
 
