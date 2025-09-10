@@ -137,36 +137,48 @@ pipeline {
 
     post {
         always {
-            sh """
-                docker stop ${CONTAINER_DB} || true
-                docker stop ${CONTAINER_REDIS} || true
-            """
-            echo "Pipeline finished: ${currentBuild.currentResult}"
+            script{
+                if (currentBuild.result != "ABORTED"){
+                    sh """
+                        docker stop ${CONTAINER_DB} || true
+                        docker stop ${CONTAINER_REDIS} || true
+                    """
+                    echo "Pipeline finished: ${currentBuild.currentResult}"
+                }
+            }
         }
 
         success {
-            withCredentials([
-                string(credentialsId: 'bot-token', variable: 'BOT_TOKEN'),
-                string(credentialsId: 'chat-id', variable: 'CHAT_ID')
-            ]) {
-                sh '''
-                curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \
-                -d chat_id=${CHAT_ID} \
-                -d text="✅ SUCCESS: ${JOB_NAME} #${BUILD_NUMBER}"
-                '''
+            script{
+                if (currentBuild.result != "ABORTED"){
+                    withCredentials([
+                        string(credentialsId: 'bot-token', variable: 'BOT_TOKEN'),
+                        string(credentialsId: 'chat-id', variable: 'CHAT_ID')
+                    ]) {
+                        sh '''
+                        curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \
+                        -d chat_id=${CHAT_ID} \
+                        -d text="✅ SUCCESS: ${JOB_NAME} #${BUILD_NUMBER}"
+                        '''
+                    }
+                }
             }
         }
 
         failure {
-            withCredentials([
-                string(credentialsId: 'bot-token', variable: 'BOT_TOKEN'),
-                string(credentialsId: 'chat-id', variable: 'CHAT_ID')
-            ]) {
-                sh '''
-                curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \
-                -d chat_id=${CHAT_ID} \
-                -d text="🚨 FAILED: ${JOB_NAME} #${BUILD_NUMBER}"
-                '''
+            script{
+                if (currentBuild.result != "ABORTED"){
+                    withCredentials([
+                        string(credentialsId: 'bot-token', variable: 'BOT_TOKEN'),
+                        string(credentialsId: 'chat-id', variable: 'CHAT_ID')
+                    ]) {
+                        sh '''
+                        curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \
+                        -d chat_id=${CHAT_ID} \
+                        -d text="🚨 FAILED: ${JOB_NAME} #${BUILD_NUMBER}"
+                        '''
+                    }
+                }
             }
         }
     }
