@@ -13,6 +13,7 @@ APPS = [
     "django_core",
     "core.apps.accounts.apps.AccountsConfig",
     "click_up",
+    "payme",
 ]
 
 if env.bool("SILK_ENABLED", False):

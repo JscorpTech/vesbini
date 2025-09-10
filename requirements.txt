@@ -49,3 +49,4 @@ boto3
 qrcode
 httpx
 click-pkg
+payme-pkg
