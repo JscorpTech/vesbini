@@ -13,6 +13,22 @@ pipeline {
     }
 
     stages {
+        stage('Check Commit Message') {
+            steps {
+                script {
+                    def commitMsg = sh(
+                        script: "git log -1 --pretty=%B",
+                        returnStdout: true
+                    ).trim()
+                    
+                    if (commitMsg.contains("[ci skip]")) {
+                        echo "Commit message contains [ci skip], aborting pipeline 🚫"
+                        currentBuild.result = 'ABORTED'
+                        error("Pipeline aborted because of [ci skip]")
+                    }
+                }
+            }
+        }
         stage('Checkout Code') {
             steps {
                 git branch: 'main', credentialsId: 'ssh', url: 'git@github.com:JscorpTech/vesbini.git'
@@ -121,48 +137,36 @@ pipeline {
 
     post {
         always {
-            script{
-                if (currentBuild.result != "ABORTED"){
-                    sh """
-                        docker stop ${CONTAINER_DB} || true
-                        docker stop ${CONTAINER_REDIS} || true
-                    """
-                    echo "Pipeline finished: ${currentBuild.currentResult}"
-                }
-            }
+            sh """
+                docker stop ${CONTAINER_DB} || true
+                docker stop ${CONTAINER_REDIS} || true
+            """
+            echo "Pipeline finished: ${currentBuild.currentResult}"
         }
 
         success {
-            script{
-                if (currentBuild.result != "ABORTED"){
-                    withCredentials([
-                        string(credentialsId: 'bot-token', variable: 'BOT_TOKEN'),
-                        string(credentialsId: 'chat-id', variable: 'CHAT_ID')
-                    ]) {
-                        sh '''
-                        curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \
-                        -d chat_id=${CHAT_ID} \
-                        -d text="✅ SUCCESS: ${JOB_NAME} #${BUILD_NUMBER}"
-                        '''
-                    }
-                }
+            withCredentials([
+                string(credentialsId: 'bot-token', variable: 'BOT_TOKEN'),
+                string(credentialsId: 'chat-id', variable: 'CHAT_ID')
+            ]) {
+                sh '''
+                curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \
+                -d chat_id=${CHAT_ID} \
+                -d text="✅ SUCCESS: ${JOB_NAME} #${BUILD_NUMBER}"
+                '''
             }
         }
 
         failure {
-            script{
-                if (currentBuild.result != "ABORTED"){
-                    withCredentials([
-                        string(credentialsId: 'bot-token', variable: 'BOT_TOKEN'),
-                        string(credentialsId: 'chat-id', variable: 'CHAT_ID')
-                    ]) {
-                        sh '''
-                        curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \
-                        -d chat_id=${CHAT_ID} \
-                        -d text="🚨 FAILED: ${JOB_NAME} #${BUILD_NUMBER}"
-                        '''
-                    }
-                }
+            withCredentials([
+                string(credentialsId: 'bot-token', variable: 'BOT_TOKEN'),
+                string(credentialsId: 'chat-id', variable: 'CHAT_ID')
+            ]) {
+                sh '''
+                curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \
+                -d chat_id=${CHAT_ID} \
+                -d text="🚨 FAILED: ${JOB_NAME} #${BUILD_NUMBER}"
+                '''
             }
         }
     }
