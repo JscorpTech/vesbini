@@ -38,7 +38,7 @@ services:
         max-file: "3"
 
   redis:
-    image: redis:7-alpine
+    image: redis:alpine 
     command: ["redis-server", "--appendonly", "yes"]
     networks:
       - vesbini
@@ -58,8 +58,8 @@ services:
         order: start-first
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
+      interval: 15s
+      timeout: 10s
       retries: 5
     logging:
       driver: json-file
@@ -68,7 +68,9 @@ services:
         max-file: "3"
 
   web:
-    image: jscorptech/vesbini:v1.0.4
+    image: jscorptech/vesbini:latest 
+    env_file:
+      - .env
     environment:
       - SCRIPT=entrypoint.sh
       - PYTHONPYCACHEPREFIX=/var/cache/pycache
@@ -94,7 +96,7 @@ services:
         parallelism: 1
         order: start-first
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8000 || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health/ || exit 1"]
       interval: 15s
       timeout: 15s
       retries: 20
@@ -169,7 +171,7 @@ services:
         max-file: "3"
 
   nginx:
-    image: nginx:1.27-alpine
+    image: jscorptech/nginx:v1
     ports:
       - mode: ingress 
         target: 80
@@ -203,7 +205,7 @@ services:
       - /var/run
       - /var/tmp
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost/health/ || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
