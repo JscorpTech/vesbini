@@ -9,6 +9,7 @@ class BaseDeliveryMethodSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "name",
+            "price",
         ]
 
 
@@ -25,4 +26,5 @@ class CreateDeliveryMethodSerializer(BaseDeliveryMethodSerializer):
         fields = [
             "id",
             "name",
+            "price",
         ]
