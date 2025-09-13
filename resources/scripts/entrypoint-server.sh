@@ -9,7 +9,7 @@ python3 manage.py collectstatic --noinput
 python3 manage.py migrate --noinput
 python3 manage.py compilemessages
 
-gunicorn config.wsgi:application -b 0.0.0.0:8000 --workers 4 # $(($(nproc) * 2 + 1)) 
+gunicorn config.wsgi:application -b 0.0.0.0:8000 --workers $(($(nproc) * 2 + 1)) 
 
 
 
