@@ -5,6 +5,7 @@ from django_core.models import AbstractBaseModel
 
 class DeliveryMethodModel(AbstractBaseModel):
     name = models.CharField(verbose_name=_("name"), max_length=255)
+    price = models.BigIntegerField(_("price"), default=0)
 
     def __str__(self):
         return str(self.name)

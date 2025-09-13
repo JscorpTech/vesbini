@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_core.models import AbstractBaseModel
@@ -27,6 +28,10 @@ class OrderModel(AbstractBaseModel):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self._payment_status = self.payment_status
+
+    def clean(self) -> None:
+        if self.is_delivery and self.delivery_method is None:
+            raise ValidationError({"delivery_method": _("Delivery method field is required")})
 
     @property
     def amount(self):

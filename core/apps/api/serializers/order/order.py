@@ -51,8 +51,12 @@ class CreateOrderSerializer(BaseOrderSerializer):
 
     def create(self, validated_data):
         with atomic():
-            order = OrderModel.objects.create(user=self.context.get("request").user)  # type: ignore
-            for item in validated_data.get("items"):
+            items = validated_data.pop("items")
+            order = OrderModel.objects.create(
+                user=self.context.get("request").user,
+                **validated_data,
+            )  # type: ignore
+            for item in items:
                 if item.variant.quantity < item.count:
                     raise serializers.ValidationError("Not enough quantity of product: {}".format(item.product.title))
                 ItemModel.objects.create(
