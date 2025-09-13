@@ -50,3 +50,4 @@ qrcode
 httpx
 click-pkg
 payme-pkg
+gevent
