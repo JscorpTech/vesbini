@@ -2,6 +2,7 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from core.apps.api.views import BasketView, CategoryView, ColorView, OrderView, ProductView, SizeView, TagView
+from core.apps.api.views.delivery import DeliveryMethodView
 
 router = DefaultRouter()
 router.register("product", ProductView, basename="product")
@@ -11,6 +12,7 @@ router.register("color", ColorView, basename="color")
 router.register("tag", TagView, basename="tag")
 router.register("basket", BasketView, basename="basket")
 router.register("order", OrderView, basename="order")
+router.register("delivery-method", DeliveryMethodView, basename="delivery-method")
 
 
 urlpatterns = [

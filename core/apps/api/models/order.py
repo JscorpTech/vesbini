@@ -20,6 +20,8 @@ class OrderModel(AbstractBaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(verbose_name=_("status"), max_length=255, choices=STATUS, default="new")
     payment_status = models.BooleanField(_("payment status"), default=False)
+    delivery_method = models.ForeignKey("DeliveryMethodModel", on_delete=models.CASCADE, null=True, blank=True)
+    address = models.CharField(_("delivery address"), max_length=255, null=True, blank=True)
 
     @property
     def amount(self):
