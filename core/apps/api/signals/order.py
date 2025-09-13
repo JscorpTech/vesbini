@@ -9,7 +9,7 @@ from core.services.moysklad import MoySklad
 
 @receiver(post_save, sender=OrderModel)
 def OrderSignal(sender, instance, created, **kwargs):
-    if instance.payment_status and not instance._payment_status and not instance.is_delivery:
+    if instance.payment_status and not instance._payment_status and instance.is_delivery:
         order_moysklad.delay(instance)
 
 

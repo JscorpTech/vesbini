@@ -57,7 +57,7 @@ class CreateOrderSerializer(BaseOrderSerializer):
                     store=StoreModel.objects.filter(default=True).first(),
                 )
                 item.delete()
-        if validated_data.get("is_delivery"):
+        if not validated_data.get("is_delivery"):
             order_moysklad.delay(order.id)
         return order
 
