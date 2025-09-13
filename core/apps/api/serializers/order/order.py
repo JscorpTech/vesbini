@@ -1,4 +1,5 @@
 from django.db.transaction import atomic
+from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
 from core.apps.api.models import OrderModel
@@ -39,6 +40,12 @@ class CreateOrderSerializer(BaseOrderSerializer):
         child=serializers.PrimaryKeyRelatedField(queryset=BasketModel.objects.all()), write_only=True
     )
 
+    def validate(self, attrs):
+        if attrs.get("is_delivery", False):
+            if attrs.get("delivery_method") is None:
+                raise serializers.ValidationError({"delivery_method": [_("Delivery method field is required")]})
+        return attrs
+
     def to_representation(self, instance):
         return {"id": instance.id}
 
@@ -65,4 +72,7 @@ class CreateOrderSerializer(BaseOrderSerializer):
         fields = [
             "id",
             "items",
+            "is_delivery",
+            "address",
+            "delivery_method",
         ]

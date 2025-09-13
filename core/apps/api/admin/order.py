@@ -35,7 +35,7 @@ class OrderAdmin(ModelAdmin):
     )
     list_display = ("id", "user__phone", "user__first_name", "_payment_status", "_status", "_amount", "created_at")
 
-    readonly_fields = ["amount"]
+    readonly_fields = ["amount", "href"]
 
     def amount(self, obj):
         return "{:,.2f} so'm".format(order_total_amount(obj))
