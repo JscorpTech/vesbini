@@ -9,3 +9,4 @@ class Command(BaseCommand):
 
     def handle(self, *args: Any, **options: Any) -> str | None:
         service = MoySklad()
+        print(service.get_stores())

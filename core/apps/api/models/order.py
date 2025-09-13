@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.forms import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django_core.models import AbstractBaseModel
 
@@ -21,7 +20,13 @@ class OrderModel(AbstractBaseModel):
     status = models.CharField(verbose_name=_("status"), max_length=255, choices=STATUS, default="new")
     payment_status = models.BooleanField(_("payment status"), default=False)
     delivery_method = models.ForeignKey("DeliveryMethodModel", on_delete=models.CASCADE, null=True, blank=True)
-    address = models.CharField(_("delivery address"), max_length=255, null=True, blank=True)
+    address = models.TextField(_("delivery address"), null=True, blank=True)
+    is_delivery = models.BooleanField(_("is delivery"), default=False)
+    href = models.CharField(_("href"), max_length=500, null=True, blank=True)
+
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self._payment_status = self.payment_status
 
     @property
     def amount(self):

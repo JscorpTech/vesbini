@@ -24,8 +24,9 @@ class MoySklad:
         )
 
     def on_request(self, request: httpx.Request):
-        request.headers["Accept-Encoding"] = "gzip"
+        # request.headers["Accept-Encoding"] = "gzip"
         request.headers["Authorization"] = "Bearer {}".format(self.password)
+        request.headers["Content-Type"] = "application/json"
 
     def product(self, quantity, amount, href):
         return {
@@ -38,6 +39,19 @@ class MoySklad:
                 }
             },
         }
+
+    def get_stores(self):
+        res = self.client.get("entity/store")
+        if res.status_code != 200:
+            raise Exception("stores not found")
+        return [
+            {
+                "href": row.get("meta", {}).get("href"),
+                "name": row.get("name"),
+            }
+            for row in res.json().get("rows", [])
+            if row.get("meta") and row.get("name")
+        ]
 
     def stok(self, codes=[], hrefs=[]):
         if len(codes) == 0 and len(hrefs) == 0:
@@ -73,7 +87,7 @@ class MoySklad:
     def create_retailshift(self):
         response = self.client.post(
             "/entity/retailshift",
-            data={
+            json={
                 "organization": {
                     "meta": {
                         "href": self.org,
@@ -88,13 +102,13 @@ class MoySklad:
                 },
             },
         )
-        if not response.status_code != 200:
+        if response.status_code != 200:
             raise Exception("retailshift not created")
         return response.json()["meta"]["href"]
 
     def close_retailshift(self, href):
         response = self.client.put(
-            "/entity/retailshift", data={"closeDate": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+            "/entity/retailshift", json={"closeDate": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
         )
         if response.status_code != 200:
             raise Exception("retailshift not closed")
@@ -122,7 +136,9 @@ class MoySklad:
             },
             "positions": products,
         }
-        response = self.client.post("/entity/retaildemand", data=payload)
+        print(payload)
+        response = self.client.post("/entity/retaildemand", json=payload)
+        print(response.json())
         if response.status_code != 200:
             raise Exception("order not created")
         return response.json()["meta"]["href"]

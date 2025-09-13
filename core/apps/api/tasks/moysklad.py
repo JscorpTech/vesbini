@@ -2,10 +2,12 @@ import logging
 from itertools import islice
 
 from celery import shared_task
+from httpx._transports import default
 
-from core.apps.api.models.moysklad import RetailShiftModel
+from core.apps.api.models.moysklad import RetailShiftModel, StoreModel
+from core.apps.api.models.order import OrderModel
 from core.apps.api.models.product import ProductVariantModel
-from core.apps.api.services.moysklad import active_retailshift
+from core.apps.api.services.moysklad import active_retailshift, default_store
 from core.services.moysklad import MoySklad
 
 
@@ -16,6 +18,20 @@ def chunked(queryset, n=50):
         if not chunk:
             break
         yield chunk
+
+
+@shared_task
+def stores():
+    service = MoySklad()
+    stores = service.get_stores()
+    for store in stores:
+        StoreModel.objects.update_or_create(
+            href=store.get("href"),
+            defaults={
+                "name": store.get("name"),
+            },
+        )
+    logging.info("Stores updated")
 
 
 @shared_task
@@ -47,3 +63,38 @@ def retailshift():
         service.close_retailshift(old_retailshift.href)
     retailshift = service.create_retailshift()
     RetailShiftModel.objects.create(href=retailshift, is_active=True)
+
+
+@shared_task(bind=True, max_retries=5)
+def order_moysklad(self, order_id):
+    try:
+        order = OrderModel.objects.get(pk=order_id)
+    except OrderModel.DoesNotExist:
+        return
+    if order.href is not None:
+        print("order already created")
+        return
+    service = MoySklad()
+    products = []
+    if order.items.count() == 0:
+        print("No items in order")
+        return self.retry(countdown=300)
+    for item in order.items.all():
+        products.append(
+            {
+                "quantity": item.count,
+                "price": item.amount,
+                "assortment": {
+                    "meta": {
+                        "href": item.variant.href,
+                        "type": "product",
+                    }
+                },
+            }
+        )
+    try:
+        order.href = service.create_order(products, default_store())
+        order.save()
+    except Exception as e:
+        print("error", e)
+        return self.retry(countdown=300)
