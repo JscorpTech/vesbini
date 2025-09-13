@@ -100,6 +100,11 @@ PAGES = [
                 "icon": "settings",
                 "link": reverse_lazy("admin:shared_settingsmodel_changelist"),
             },
+            {
+                "title": _("delivery-methods"),
+                "icon": "delivery_truck_bolt",
+                "link": reverse_lazy("admin:api_deliverymethodmodel_changelist"),
+            },
         ],
     },
 ]
