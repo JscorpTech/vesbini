@@ -1,9 +1,10 @@
 from telebot.types import Message
 
 from core.apps.bot.bot import bot
+from core.apps.bot.buttons import buttons
 from core.apps.bot.services import get_message as _
 
 
 @bot.message_handler(commands=["start"])
 def start(msg: Message):
-    bot.send_message(msg.chat.id, _("start_message"))
+    bot.send_message(msg.chat.id, _("start_message"), reply_markup=buttons.home())
