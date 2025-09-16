@@ -25,6 +25,7 @@ urlpatterns = [
     path("payment/", include("core.apps.payment.urls")),
     path("api/", include("core.apps.api.urls")),
     path("api/", include("core.apps.shared.urls")),
+    path("api/", include("core.apps.bot.urls")),
 ]
 
 
