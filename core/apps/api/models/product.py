@@ -48,6 +48,7 @@ class ProductVariantModel(AbstractBaseModel):
     quantity = models.BigIntegerField(_("quantity"), default=0)
     amount = models.BigIntegerField(_("amount"), default=0)
     sku = models.CharField(_("sku"), max_length=255, unique=True, blank=True, null=True)
+    is_bundle = models.BooleanField(_("is bundle"), default=True)
     href = models.CharField(_("href"), max_length=500, blank=True, null=True)
 
     def __str__(self) -> str:

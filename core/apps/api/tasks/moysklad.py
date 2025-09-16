@@ -37,17 +37,17 @@ def stores():
 @shared_task
 def moysklad():
     service = MoySklad()
-    products = ProductVariantModel.objects.filter(sku__isnull=False, href__isnull=False).values_list("sku", flat=True)
+    # products = ProductVariantModel.objects.filter(sku__isnull=False, href__isnull=False).values_list("sku", flat=True)
+    # for chunk in chunked(products):
+    #     try:
+    #         for code, quantity, href in service.stok(hrefs=chunk):
+    #             ProductVariantModel.objects.filter(sku=code).update(quantity=quantity, href=href)
+    #     except Exception as e:
+    #         logging.error(e)
+    products = ProductVariantModel.objects.filter(sku__isnull=False).values_list("sku", "is_bundle")
     for chunk in chunked(products):
         try:
-            for code, quantity, href in service.stok(hrefs=chunk):
-                ProductVariantModel.objects.filter(sku=code).update(quantity=quantity, href=href)
-        except Exception as e:
-            logging.error(e)
-    products = ProductVariantModel.objects.filter(sku__isnull=False, href__isnull=True).values_list("sku", flat=True)
-    for chunk in chunked(products):
-        try:
-            for code, quantity, href in service.stok(chunk):
+            for code, quantity, href in service.stok(chunk[0], kind="bundle" if chunk[1] else "product"):
                 ProductVariantModel.objects.filter(sku=code).update(quantity=quantity, href=href)
         except Exception as e:
             logging.error(e)
@@ -87,7 +87,7 @@ def order_moysklad(self, order_id):
                 "assortment": {
                     "meta": {
                         "href": item.variant.href,
-                        "type": "product",
+                        "type": "bundle" if item.varaint.is_bundle else "product",
                     }
                 },
             }
