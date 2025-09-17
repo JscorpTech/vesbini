@@ -27,10 +27,10 @@ class ProductVariantInline(TabularInline):
     tab = True
     extra = 0
     can_delete = False
-    fields = ["color", "size", "quantity", "amount", "sku", "is_bundle", "updated_at"]
+    fields = ["color", "size", "quantity", "amount", "sku", "is_bundle"]
 
     def get_readonly_fields(self, request, obj=...):
-        return ["product", "color", "size", "updated_at", "href"]
+        return ["product", "color", "size", "href"]
 
     def has_add_permission(self, request, obj) -> bool:
         return False
