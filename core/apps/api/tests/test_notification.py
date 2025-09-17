@@ -55,10 +55,11 @@ class UsernotificationTest(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.instance = self._create_data()
+        self.client.force_authenticate(self.instance.user)
         self.urls = {
-            "list": reverse("usernotification-list"),
-            "retrieve": reverse("usernotification-detail", kwargs={"pk": self.instance.pk}),
-            "retrieve-not-found": reverse("usernotification-detail", kwargs={"pk": 1000}),
+            "list": reverse("notification-list"),
+            "retrieve": reverse("notification-detail", kwargs={"pk": self.instance.pk}),
+            "retrieve-not-found": reverse("notification-detail", kwargs={"pk": 1000}),
         }
 
     def test_create(self):
