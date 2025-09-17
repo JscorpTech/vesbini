@@ -3,7 +3,7 @@ from celery.schedules import crontab
 CELERY_BEAT_SCHEDULE = {
     "moysklad": {
         "task": "core.apps.api.tasks.moysklad.moysklad",
-        "schedule": crontab(minute="*/2"),
+        "schedule": crontab(minute="*/10"),
     },
     "stores": {
         "task": "core.apps.api.tasks.moysklad.stores",
