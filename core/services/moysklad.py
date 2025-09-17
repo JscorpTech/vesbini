@@ -12,7 +12,7 @@ class MoySklad:
         self.base_uri = "https://api.moysklad.ru/api/remap/1.2"
         self.client = httpx.Client(
             base_url=self.base_uri,
-            proxy="socks5h://43.245.226.222:10800",
+            # proxy="socks5h://43.245.226.222:10800",
             event_hooks={
                 "request": [self.on_request],
             },
