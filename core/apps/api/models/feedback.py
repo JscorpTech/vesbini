@@ -18,7 +18,7 @@ class FeedbackModel(AbstractBaseModel):
         self._answer = self.answer
 
     def __str__(self):
-        return str(self.pk)
+        return str(self.message)
 
     @classmethod
     def _create_fake(self):
