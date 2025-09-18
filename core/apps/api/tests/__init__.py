@@ -1,4 +1,5 @@
 from .test_delivery import *  # noqa
+from .test_feedback import *  # noqa
 from .test_notification import *  # noqa
 from .test_order import *  # noqa
 from .test_product import *  # noqa

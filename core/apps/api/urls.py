@@ -5,7 +5,10 @@ from core.apps.api.views import BasketView, CategoryView, ColorView, OrderView, 
 from core.apps.api.views.delivery import DeliveryMethodView
 from core.apps.api.views.notification import UserNotificationView
 
+from .views import FeedbackView
+
 router = DefaultRouter()
+router.register("feedback", FeedbackView, basename="feedback")
 router.register("product", ProductView, basename="product")
 router.register("category", CategoryView, basename="category")
 router.register("size", SizeView, basename="size")
@@ -15,8 +18,4 @@ router.register("basket", BasketView, basename="basket")
 router.register("order", OrderView, basename="order")
 router.register("notification", UserNotificationView, basename="notification")
 router.register("delivery-method", DeliveryMethodView, basename="delivery-method")
-
-
-urlpatterns = [
-    path("", include(router.urls)),
-]
+urlpatterns = [path("", include(router.urls))]
