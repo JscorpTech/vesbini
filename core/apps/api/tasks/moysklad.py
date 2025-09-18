@@ -87,7 +87,7 @@ def order_moysklad(self, order_id):
                 "assortment": {
                     "meta": {
                         "href": item.variant.href,
-                        "type": "bundle" if item.varaint.is_bundle else "product",
+                        "type": "bundle" if item.variant.is_bundle else "product",
                     }
                 },
             }
