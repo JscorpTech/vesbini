@@ -110,6 +110,11 @@ PAGES = [
                 "icon": "feedback",
                 "link": reverse_lazy("admin:api_feedbackmodel_changelist"),
             },
+            {
+                "title": _("Notifications"),
+                "icon": "notifications",
+                "link": reverse_lazy("admin:api_notificationmodel_changelist"),
+            },
         ],
     },
 ]
