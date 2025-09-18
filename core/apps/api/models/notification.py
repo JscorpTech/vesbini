@@ -12,7 +12,7 @@ class NotificationModel(AbstractBaseModel):
     image = models.ImageField(_("image"), upload_to="notification/", null=True, blank=True)
 
     def __str__(self):
-        return str(self.pk)
+        return str(self.title)
 
     @classmethod
     def _create_fake(cls):
@@ -33,7 +33,7 @@ class UserNotificationModel(AbstractBaseModel):
     is_read = models.BooleanField(_("is read"), default=False)
 
     def __str__(self):
-        return str(self.pk)
+        return str(self.notification.title)
 
     @classmethod
     def _create_fake(cls):
