@@ -8,6 +8,8 @@ from core.apps.api.models import NotificationModel, UserNotificationModel
 @receiver(post_save, sender=NotificationModel)
 def NotificationSignal(sender, instance, created, **kwargs):
     if created:
+        if hasattr(instance, "_skip_signal") and getattr(instance, "_skip_signal", False):
+            return
         objects = []
         for user in get_user_model().objects.all():
             objects.append(UserNotificationModel(user=user, notification=instance))

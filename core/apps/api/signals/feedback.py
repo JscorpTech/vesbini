@@ -9,10 +9,12 @@ from core.apps.api.models.notification import NotificationModel, UserNotificatio
 @receiver(post_save, sender=FeedbackModel)
 def FeedbackSignal(sender, instance, created, **kwargs):
     if not created and instance._answer is None and instance.answer is not None:
-        notification = NotificationModel.objects.create(
+        notification = NotificationModel(
             title=_("Feedback"),
             desc=instance.answer,
         )
+        setattr(notification, "_skip_signal", True)
+        notification.save()
         UserNotificationModel.objects.create(
             user=instance.user,
             notification=notification,
