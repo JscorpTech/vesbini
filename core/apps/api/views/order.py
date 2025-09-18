@@ -1,5 +1,6 @@
 from django_core.mixins import BaseViewSetMixin
 from drf_spectacular.utils import extend_schema
+from httpx import request
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
@@ -16,7 +17,6 @@ from core.apps.api.serializers.order import (
 
 @extend_schema(tags=["order"])
 class OrderView(BaseViewSetMixin, ModelViewSet):
-    queryset = OrderModel.objects.order_by("-id").all()
     serializer_class = ListOrderSerializer
     permission_classes = [IsAuthenticated]
 
@@ -26,6 +26,9 @@ class OrderView(BaseViewSetMixin, ModelViewSet):
         "retrieve": RetrieveOrderSerializer,
         "create": CreateOrderSerializer,
     }
+
+    def get_queryset(self):  # type:ignore
+        return OrderModel.objects.order_by("-id").filter(user=self.request.user).all()
 
 
 @extend_schema(tags=["item"])
