@@ -83,7 +83,7 @@ def order_moysklad(self, order_id):
         products.append(
             {
                 "quantity": item.count,
-                "price": item.amount,
+                "price": item.amount * 100,
                 "assortment": {
                     "meta": {
                         "href": item.variant.href,
