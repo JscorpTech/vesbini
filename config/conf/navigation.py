@@ -105,6 +105,11 @@ PAGES = [
                 "icon": "delivery_truck_bolt",
                 "link": reverse_lazy("admin:api_deliverymethodmodel_changelist"),
             },
+            {
+                "title": _("Feedback"),
+                "icon": "feedback",
+                "link": reverse_lazy("admin:api_feedbackmodel_changelist"),
+            },
         ],
     },
 ]
