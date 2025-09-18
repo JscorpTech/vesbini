@@ -60,7 +60,7 @@ def retailshift():
     service = MoySklad()
     old_retailshift = active_retailshift()
     if old_retailshift is not None:
-        service.close_retailshift(old_retailshift.href)
+        service.close_retailshift(old_retailshift)
     retailshift = service.create_retailshift()
     RetailShiftModel.objects.create(href=retailshift, is_active=True)
 
