@@ -242,9 +242,7 @@ class MoySklad:
         return response.json()["meta"]["href"]
 
     def close_retailshift(self, href):
-        response = self.client.put(
-            "entity/retailshift", json={"closeDate": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
-        )
+        response = self.client.put(href, json={"closeDate": datetime.now().strftime("%Y-%m-%d %H:%M:%S")})
         if response.status_code != 200:
             print(response.json())
             raise Exception("retailshift not closed")
