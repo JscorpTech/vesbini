@@ -23,7 +23,9 @@ class FeedbackModel(AbstractBaseModel):
     @classmethod
     def _create_fake(self):
         return self.objects.create(
-            name="mock",
+            message="test",
+            user=User._create_fake(),
+            answer="salom",
         )
 
     class Meta:
