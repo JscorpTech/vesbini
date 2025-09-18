@@ -246,6 +246,7 @@ class MoySklad:
             "entity/retailshift", json={"closeDate": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
         )
         if response.status_code != 200:
+            print(response.json())
             raise Exception("retailshift not closed")
         return True
 
