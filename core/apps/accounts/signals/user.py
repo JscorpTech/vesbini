@@ -20,25 +20,24 @@ def user_signal(sender, created, instance, **kwargs):
 
 @receiver(post_save, sender=Profile)
 def profile_signal(sender, created, instance, **kwargs):
-    if not created:
-        return
-    data = "{}:{}".format(instance.user.username, instance.id)
-    filename = "qrcode/{}.png".format(instance.user.id)
-    qr = qrcode.QRCode(
-        version=1,  # avtomatik o‘lcham uchun 1 yoki None
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=10,
-        border=4,
-    )
-    qr.add_data(data)
-    qr.make(fit=True)
+    if created:
+        data = "{}:{}".format(instance.user.username, instance.id)
+        filename = "qrcode/{}.png".format(instance.user.id)
+        qr = qrcode.QRCode(
+            version=1,  # avtomatik o‘lcham uchun 1 yoki None
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data(data)
+        qr.make(fit=True)
 
-    img = qr.make_image(fill_color="black", back_color="white")
-    buffer = BytesIO()
-    img.save(buffer, format="PNG")
-    buffer.seek(0)
-    # Default storage orqali saqlash
-    file = ContentFile(buffer.read())
-    saved_path = default_storage.save(filename, file)
-    instance.qrcode = saved_path
-    instance.save()
+        img = qr.make_image(fill_color="black", back_color="white")
+        buffer = BytesIO()
+        img.save(buffer, format="PNG")
+        buffer.seek(0)
+        # Default storage orqali saqlash
+        file = ContentFile(buffer.read())
+        saved_path = default_storage.save(filename, file)
+        instance.qrcode = saved_path
+        instance.save()
