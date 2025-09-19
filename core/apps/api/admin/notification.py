@@ -9,6 +9,9 @@ class NotificationAdmin(ModelAdmin):
     list_display = (
         "id",
         "__str__",
+        "title",
+        "desc",
+        "created_at",
     )
 
 
