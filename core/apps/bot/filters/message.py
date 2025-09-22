@@ -34,4 +34,4 @@ class IsAdminFilter(custom_filters.AdvancedCustomFilter):
 
     def check(self, message, is_admin):
         if is_admin:
-            return message.chat.id in get_config("bot", "admins", [])
+            return str(message.chat.id) in list(get_config("bot", "admins", []))
