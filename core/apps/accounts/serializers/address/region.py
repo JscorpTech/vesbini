@@ -9,6 +9,7 @@ class BaseCountrySerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "name",
+            "flag",
         ]
 
 
