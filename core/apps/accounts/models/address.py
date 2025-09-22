@@ -15,6 +15,8 @@ class CountryModel(AbstractBaseModel):
     def _create_fake(cls):
         return cls.objects.create(
             name="mock",
+            flag="mock.jpg",
+            code="+998",
         )
 
     class Meta:
