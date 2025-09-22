@@ -10,6 +10,7 @@ class BaseCountrySerializer(serializers.ModelSerializer):
             "id",
             "name",
             "flag",
+            "code",
         ]
 
 
