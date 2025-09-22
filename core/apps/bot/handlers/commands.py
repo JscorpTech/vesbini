@@ -18,7 +18,7 @@ def message_handler(msg: Message):
     bot.send_message(msg.chat.id, _("send_message"))
 
 
-@bot.message_handler(is_admin=True, state=Admin.message)
+@bot.message_handler(is_admin=True, state=Admin.message, content_types=["text", "video", "photo", "document"])
 def admin_send_message_handler(msg: Message):
     bot.send_message(msg.chat.id, _("message_send_start"))
     bot.delete_state(msg.chat.id)

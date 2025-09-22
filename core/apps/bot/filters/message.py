@@ -2,6 +2,7 @@ from telebot import custom_filters
 
 from core.apps.bot.services import get_data
 from core.apps.bot.services import get_message as _
+from core.apps.shared.utils.settings import get_config
 
 
 class MessageFilter(custom_filters.AdvancedCustomFilter):
@@ -33,5 +34,4 @@ class IsAdminFilter(custom_filters.AdvancedCustomFilter):
 
     def check(self, message, is_admin):
         if is_admin:
-            print("is admin")
-            return True
+            return message.chat.id in get_config("bot", "admins", [])
