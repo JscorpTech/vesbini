@@ -6,6 +6,7 @@ from django_core.models import AbstractBaseModel
 class CountryModel(AbstractBaseModel):
     name = models.CharField(verbose_name=_("name"), max_length=255)
     flag = models.ImageField(_("flag"), upload_to="flag/", null=True, blank=False)
+    code = models.CharField(_("code"), max_length=10, null=True, blank=False)
 
     def __str__(self):
         return str(self.name)
