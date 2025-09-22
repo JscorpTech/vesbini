@@ -26,3 +26,12 @@ class PageFilter(custom_filters.AdvancedCustomFilter):
                     return True
             return False
         return get_data(message.chat.id, "page") == pages
+
+
+class IsAdminFilter(custom_filters.AdvancedCustomFilter):
+    key = "is_admin"
+
+    def check(self, message, is_admin):
+        if is_admin:
+            print("is admin")
+            return True
