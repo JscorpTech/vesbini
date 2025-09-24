@@ -21,7 +21,7 @@ class MoySklad:
         self.password = env.str("MOYSKLAD_PASSWORD")
         self.org = "https://api.moysklad.ru/api/remap/1.2/entity/organization/0122d460-8198-11f0-0a80-03bb002d25d7"
         self.retailstore = (
-            "https://api.moysklad.ru/api/remap/1.2/entity/retailstore/a3fd5441-0d84-11ed-0a80-026d001bdb75"
+            "https://api.moysklad.ru/api/remap/1.2/entity/retailstore/2e8fae2d-982f-11f0-0a80-0df700024da4"
         )
 
     def on_request(self, request: httpx.Request):
