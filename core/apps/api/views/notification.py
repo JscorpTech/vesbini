@@ -1,8 +1,9 @@
 from django_core.mixins import BaseViewSetMixin
 from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import action
+from rest_framework.mixins import DestroyModelMixin, ListModelMixin, RetrieveModelMixin
 from rest_framework.permissions import AllowAny
-from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.viewsets import GenericViewSet
 
 from core.apps.api.models import UserNotificationModel
 from core.apps.api.serializers.notification import (
@@ -26,7 +27,7 @@ from core.apps.api.serializers.notification import (
 
 
 @extend_schema(tags=["usernotification"])
-class UserNotificationView(BaseViewSetMixin, ReadOnlyModelViewSet):
+class UserNotificationView(BaseViewSetMixin, ListModelMixin, RetrieveModelMixin, DestroyModelMixin, GenericViewSet):
     serializer_class = ListUsernotificationSerializer
     permission_classes = [AllowAny]
 
