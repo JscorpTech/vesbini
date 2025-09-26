@@ -7,10 +7,12 @@ from core.apps.api.models.promocode import PromocodeModel
 from core.services.cashback import calc_cashback
 
 
-def order_total_amount(order):
+def order_total_amount(order) -> int:
     amount = order.items.aggregate(total=models.Sum(models.F("amount") * models.F("count")))["total"]  # type: ignore
     if order.is_delivery:
         amount += order.delivery_method.price
+    if amount is None:
+        return 0
     return amount
 
 
@@ -34,6 +36,7 @@ def calc_promocode_discount(amount, code):
         return promocode.discount
     if promocode.promo_type == PromocodeTypeEnum.PERCENTAGE.value:
         return amount * promocode.discount / 100
+    return 0
 
 
 def confirm_order(order):

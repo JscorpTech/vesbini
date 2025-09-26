@@ -14,9 +14,7 @@ class PromocodeTest(TestCase):
         self.client = APIClient()
         self.instance = self._create_data()
         self.urls = {
-            "list": reverse("promocode-list"),
-            "retrieve": reverse("promocode-detail", kwargs={"pk": self.instance.pk}),
-            "retrieve-not-found": reverse("promocode-detail", kwargs={"pk": 1000}),
+            "validate": reverse("promocode-validate"),
         }
 
     def test_create(self):
@@ -31,17 +29,18 @@ class PromocodeTest(TestCase):
     def test_destroy(self):
         self.assertTrue(True)
 
-    def test_list(self):
-        response = self.client.get(self.urls["list"])
+    def test_validate(self):
+        response = self.client.post(self.urls["validate"], data={"code": self.instance.code})
         self.assertTrue(response.json()["status"])
         self.assertEqual(response.status_code, 200)
 
-    def test_retrieve(self):
-        response = self.client.get(self.urls["retrieve"])
-        self.assertTrue(response.json()["status"])
-        self.assertEqual(response.status_code, 200)
-
-    def test_retrieve_not_found(self):
-        response = self.client.get(self.urls["retrieve-not-found"])
+    def test_invalid_code(self):
+        response = self.client.post(self.urls["validate"], data={"code": self.instance.code + "1"})
         self.assertFalse(response.json()["status"])
         self.assertEqual(response.status_code, 404)
+
+    def test_code_expired(self):
+        obj = PromocodeModel.objects.create(code="1111", quantity=0, discount=100)
+        response = self.client.post(self.urls["validate"], data={"code": obj.code})
+        self.assertFalse(response.json()["status"])
+        self.assertEqual(response.status_code, 400)
