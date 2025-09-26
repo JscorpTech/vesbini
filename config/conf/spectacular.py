@@ -16,7 +16,7 @@ def custom_postprocessing_hook(result, generator, request, public):
         for method, operation in methods.items():
             if "responses" in operation:
                 for status_code, response in operation["responses"].items():
-                    if "content" in response and str(status_code) == "200":
+                    if "content" in response and (str(status_code) == "200" or str(status_code) == "201"):
                         for content_type, content in response["content"].items():
                             # Wrap original schema
                             original_schema = content.get("schema", {})
