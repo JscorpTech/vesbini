@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from django_core.models import AbstractBaseModel
 
 from core.apps.api.models.product import ProductModel, ProductVariantModel
-from core.apps.api.services.order import order_total_amount
+from core.apps.api.services.order import order_total_amount, order_total_amount_promocode
 
 User = get_user_model()
 
@@ -24,6 +24,11 @@ class OrderModel(AbstractBaseModel):
     address = models.TextField(_("delivery address"), null=True, blank=True)
     is_delivery = models.BooleanField(_("is delivery"), default=False)
     href = models.CharField(_("href"), max_length=500, null=True, blank=True)
+    promocode = models.ForeignKey(
+        "PromocodeModel", verbose_name=_("promocode"), on_delete=models.SET_NULL, null=True, blank=True
+    )
+    use_cashback = models.BigIntegerField(_("use cashback amount"), default=0)
+    promocode_discount = models.BigIntegerField(_("promocode discount"), default=0)
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
@@ -35,7 +40,15 @@ class OrderModel(AbstractBaseModel):
 
     @property
     def amount(self):
+        return order_total_amount_promocode(self)
+
+    @property
+    def orginal_amount(self):
         return order_total_amount(self)
+
+    @property
+    def payment_amount(self):
+        return self.amount - self.use_cashback
 
     def __str__(self):
         return f"{self.pk} - {self.user.first_name} - {self.user.phone}"

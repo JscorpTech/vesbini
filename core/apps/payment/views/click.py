@@ -40,7 +40,7 @@ def generate_transaction_click(request, order_id):
         return Response(data={"status": False, "data": {"detail": _("Order not found")}})
     paylink = click_up.initializer.generate_pay_link(
         id=order_id,
-        amount=order.amount,
+        amount=order.payment_amount,
         return_url=settings.REDIRECT_LINK,
     )
     return Response(data={"status": True, "data": {"paylink": paylink}})

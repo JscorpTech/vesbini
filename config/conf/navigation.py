@@ -62,6 +62,11 @@ PAGES = [
                 "icon": "order_approve",
                 "link": reverse_lazy("admin:api_ordermodel_changelist"),
             },
+            {
+                "title": _("Promocodelar"),
+                "icon": "barcode",
+                "link": reverse_lazy("admin:api_promocodemodel_changelist"),
+            },
         ],
     },
     {

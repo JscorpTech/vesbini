@@ -33,14 +33,41 @@ class OrderAdmin(ModelAdmin):
         ("status", ChoicesDropdownFilter),
         ("payment_status", BooleanRadioFilter),
     )
-    list_display = ("id", "user__phone", "user__first_name", "_payment_status", "_status", "_amount", "created_at")
+    list_display = (
+        "id",
+        "user__phone",
+        "user__first_name",
+        "_payment_status",
+        "_status",
+        "_payment_amount",
+        "_original_amount",
+        "is_delivery",
+        "delivery_method",
+        "created_at",
+    )
 
-    readonly_fields = ["amount", "href"]
+    readonly_fields = [
+        "use_cashback",
+        "promocode",
+        "promocode_discount",
+        "_payment_amount",
+        "_original_amount",
+        "href",
+    ]
 
-    def amount(self, obj):
-        return "{:,.2f} so'm".format(order_total_amount(obj))
+    def format(self, amount):
+        return "{:,.2f} so'm".format(amount)
 
-    amount.short_desctiption = "Amount"
+    @display(description=_("payment amount"), label=True)
+    def _payment_amount(self, obj):
+        return self.format(obj.payment_amount)
+
+    @display(description=_("original amount"), label=True)
+    def _original_amount(self, obj):
+        return self.format(order_total_amount(obj))
+
+    _payment_amount.short_desctiption = "Payment amount"
+    _original_amount.short_desctiption = "Original amount"
 
     @display(
         ordering="status",
@@ -58,10 +85,6 @@ class OrderAdmin(ModelAdmin):
     @display(description=_("payment status"), boolean=True)
     def _payment_status(self, obj):
         return obj.payment_status
-
-    @display(description=_("amount"), label=True)
-    def _amount(self, obj):
-        return self.amount(obj)
 
 
 @admin.register(ItemModel)
