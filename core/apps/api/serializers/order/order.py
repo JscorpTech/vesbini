@@ -7,6 +7,7 @@ from core.apps.api.models.moysklad import StoreModel
 from core.apps.api.models.order import ItemModel
 from core.apps.api.models.product import BasketModel
 from core.apps.api.serializers.order.item import ListItemSerializer
+from core.apps.api.services.order import confirm_order
 from core.apps.api.tasks.moysklad import order_moysklad
 
 
@@ -69,7 +70,7 @@ class CreateOrderSerializer(BaseOrderSerializer):
                 )
                 item.delete()
         if not validated_data.get("is_delivery"):
-            order_moysklad.delay(order.id)
+            confirm_order(order)
         return order
 
     class Meta(BaseOrderSerializer.Meta):

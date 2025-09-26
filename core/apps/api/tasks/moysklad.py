@@ -2,7 +2,6 @@ import logging
 from itertools import islice
 
 from celery import shared_task
-from httpx._transports import default
 
 from core.apps.api.models.moysklad import RetailShiftModel, StoreModel
 from core.apps.api.models.order import OrderModel
