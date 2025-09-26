@@ -1,5 +1,5 @@
 from django_core.mixins import BaseViewSetMixin
-from drf_spectacular.utils import OpenApiResponse, extend_schema
+from drf_spectacular.utils import OpenApiRequest, OpenApiResponse, extend_schema
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
@@ -23,6 +23,14 @@ class PromocodeView(BaseViewSetMixin, GenericViewSet):
 
     @extend_schema(
         summary="Promocode mavjud ekanligini tekshirish",
+        request=OpenApiRequest(
+            request={
+                "type": "object",
+                "properties": {
+                    "code": {"type": "string", "example": "1234"},
+                },
+            }
+        ),
         responses={
             200: CheckPromocodeSerializer,
             400: OpenApiResponse(
