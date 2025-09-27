@@ -1,4 +1,5 @@
 import logging
+import time
 from itertools import islice
 
 from celery import shared_task
@@ -50,6 +51,7 @@ def moysklad():
                 ProductVariantModel.objects.filter(sku=code).update(quantity=quantity, href=href)
         except Exception as e:
             logging.error(e)
+        time.sleep(360)
 
     print("updated")
 
