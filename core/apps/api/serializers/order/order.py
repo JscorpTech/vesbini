@@ -9,6 +9,7 @@ from core.apps.api.models.moysklad import StoreModel
 from core.apps.api.models.order import ItemModel
 from core.apps.api.models.product import BasketModel
 from core.apps.api.models.promocode import PromocodeModel
+from core.apps.api.serializers.delivery.deliverymethod import ListDeliveryMethodSerializer
 from core.apps.api.serializers.order.item import ListItemSerializer
 from core.apps.api.services.order import calc_promocode_discount, confirm_order
 from core.services.promocode import subtract_promocode, validate_promocode
@@ -32,10 +33,14 @@ class BaseOrderSerializer(serializers.ModelSerializer):
 
 
 class ListOrderSerializer(BaseOrderSerializer):
+    delivery_method = ListDeliveryMethodSerializer()
+
     class Meta(BaseOrderSerializer.Meta): ...
 
 
 class RetrieveOrderSerializer(BaseOrderSerializer):
+    delivery_method = ListDeliveryMethodSerializer()
+
     class Meta(BaseOrderSerializer.Meta): ...
 
 
