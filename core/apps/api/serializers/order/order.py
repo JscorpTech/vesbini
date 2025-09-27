@@ -94,7 +94,7 @@ class CreateOrderSerializer(BaseOrderSerializer):
             subtract_balance(order.user, order.use_cashback)
             order.save()
         if not validated_data.get("is_delivery"):
-            confirm_order(order)
+            confirm_order(order, False)
         return order
 
     class Meta(BaseOrderSerializer.Meta):

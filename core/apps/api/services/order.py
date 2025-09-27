@@ -39,10 +39,11 @@ def calc_promocode_discount(amount, code):
     return 0
 
 
-def confirm_order(order):
+def confirm_order(order, cashback=True):
     from core.apps.api.tasks.moysklad import order_moysklad
 
-    add_balance(order.user, calc_cashback(order))
+    if cashback:
+        add_balance(order.user, calc_cashback(order))
     order_moysklad.delay(order.id)
 
 
