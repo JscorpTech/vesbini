@@ -19,4 +19,6 @@ class RetailshiftAdmin(ModelAdmin):
     list_display = (
         "id",
         "__str__",
+        "updated_at",
+        "created_at",
     )
