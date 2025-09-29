@@ -51,7 +51,7 @@ def moysklad():
                 ProductVariantModel.objects.filter(sku=code).update(quantity=quantity, href=href)
         except Exception as e:
             logging.error(e)
-        time.sleep(360)
+        time.sleep(10)
 
     print("updated")
 
