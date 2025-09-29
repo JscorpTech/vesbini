@@ -104,9 +104,11 @@ class SizeView(BaseViewSetMixin, ReadOnlyModelViewSet):
 
 @extend_schema(tags=["basket"])
 class BasketView(BaseViewSetMixin, ModelViewSet):
-    queryset = BasketModel.objects.order_by("-id").all()
     serializer_class = ListBasketSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):  # type:ignore
+        return BasketModel.objects.order_by("-id").filter(user=self.request.user).all()
 
     action_permission_classes = {}
     action_serializer_class = {
