@@ -23,6 +23,9 @@ class User(auth_models.AbstractUser):
     country = models.ForeignKey("CountryModel", on_delete=models.SET_NULL, null=True, blank=True)
     region = models.ForeignKey("RegionModel", on_delete=models.SET_NULL, null=True, blank=True)
 
+    # Moysklad
+    href = models.CharField(_("href"), max_length=255, null=True, blank=True)
+
     USERNAME_FIELD = "phone"
     objects = UserManager()  # type: ignore
 
