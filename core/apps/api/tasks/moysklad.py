@@ -7,7 +7,7 @@ from celery import shared_task
 from core.apps.api.models.moysklad import RetailShiftModel, StoreModel
 from core.apps.api.models.order import OrderModel
 from core.apps.api.models.product import ProductVariantModel
-from core.apps.api.services.moysklad import active_retailshift, default_store
+from core.apps.api.services.moysklad import active_retailshift, counterparty, default_store
 from core.services.moysklad import MoySklad
 
 
@@ -94,7 +94,7 @@ def order_moysklad(self, order_id):
             }
         )
     try:
-        order.href = service.create_order(products, default_store())
+        order.href = service.create_customerorder(counterparty(order.user), products, default_store())
         order.save()
     except Exception as e:
         print("error", e)

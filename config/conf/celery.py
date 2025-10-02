@@ -9,8 +9,8 @@ CELERY_BEAT_SCHEDULE = {
         "task": "core.apps.api.tasks.moysklad.stores",
         "schedule": crontab(minute="*/30"),
     },
-    "retailshift": {
-        "task": "core.apps.api.tasks.moysklad.retailshift",
-        "schedule": crontab(hour=0, minute=0),
-    },
+    # "retailshift": {
+    #     "task": "core.apps.api.tasks.moysklad.retailshift",
+    #     "schedule": crontab(hour=0, minute=0),
+    # },
 }

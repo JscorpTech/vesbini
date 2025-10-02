@@ -281,3 +281,82 @@ class MoySklad:
         if response.status_code != 200:
             raise Exception("order not created")
         return response.json()["meta"]["href"]
+
+    # ---------------------------------------
+    # Customer order
+    # ---------------------------------------
+    def create_customerorder(self, agent, products, store):
+        """
+        agent: counterparty href.
+        products: productlar ro'yxati.
+        store: store href
+        """
+        payload = {
+            "agent": {
+                "meta": {
+                    "href": agent,
+                    "type": "counterparty",
+                    "mediaType": "application/json",
+                }
+            },
+            "organization": {
+                "meta": {
+                    "href": self.org,
+                    "type": "organization",
+                }
+            },
+            "store": {
+                "meta": {
+                    "href": store,
+                    "type": "store",
+                }
+            },
+            "positions": products,
+        }
+        response = self.client.post("entity/customerorder", json=payload)
+        if response.status_code != 200:
+            raise Exception("customerorder not created")
+        return response.json()["meta"]["href"]
+
+    def counterparty(self, name: str, phone: str) -> str:
+        payload = {
+            "name": name,
+            "companyType": "individual",
+            "phone": phone,
+            "attributes": [
+                {
+                    "meta": {
+                        "href": "https://api.moysklad.ru/api/remap/1.2/entity/counterparty/metadata/attributes/048da76a-d4c6-11ef-0a80-11f5000bbd78",
+                        "type": "attributemetadata",
+                        "mediaType": "application/json",
+                    },
+                    "value": phone,
+                },
+                {
+                    "meta": {
+                        "href": "https://api.moysklad.ru/api/remap/1.2/entity/counterparty/metadata/attributes/8f09482a-d4c6-11ef-0a80-03bf000c313f",
+                        "type": "attributemetadata",
+                        "mediaType": "application/json",
+                    },
+                    "value": name,
+                },
+                {
+                    "meta": {
+                        "href": "https://api.moysklad.ru/api/remap/1.2/entity/counterparty/metadata/attributes/383e3f49-d951-11ef-0a80-0fd300023dd3",
+                        "type": "attributemetadata",
+                        "mediaType": "application/json",
+                    },
+                    "value": {
+                        "meta": {
+                            "href": "https://api.moysklad.ru/api/remap/1.2/entity/customentity/36bff3b8-d951-11ef-0a80-025d000201dc/842bdcd6-d951-11ef-0a80-0b7a00028a94",
+                            "type": "customentity",
+                            "mediaType": "application/json",
+                        }
+                    },
+                },
+            ],
+        }
+        response = self.client.post("entity/counterparty", json=payload)
+        if response.status_code != 200:
+            raise Exception("counterparty not created")
+        return response.json()["meta"]["href"]
