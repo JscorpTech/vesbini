@@ -1,6 +1,4 @@
-from core import services
 from core.apps.api.models.moysklad import RetailShiftModel, StoreModel
-from core.services.moysklad import MoySklad
 
 
 def active_retailshift():
@@ -18,6 +16,8 @@ def default_store():
 
 
 def counterparty(user):
+    from core.services.moysklad import MoySklad
+
     service = MoySklad()
     if user.href is None:
         href = service.counterparty(user.first_name, user.phone)
