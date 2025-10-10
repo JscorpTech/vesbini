@@ -41,4 +41,4 @@ makemigrate: makemigration migrate
 fresh: reset_db makemigrate seed
 
 test:
-	docker compose exec web pytest -v
+	docker compose exec web pytest -v -n auto

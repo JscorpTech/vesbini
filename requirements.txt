@@ -51,4 +51,5 @@ httpx
 click-pkg
 payme-pkg
 gevent
-pyTelegramBotAPI
+pytest-xdist
+

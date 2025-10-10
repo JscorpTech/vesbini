@@ -114,7 +114,7 @@ pipeline {
                         -e DB_PASSWORD=postgres \
                         -e DJANGO_SETTINGS_MODULE=config.settings.test \
                         ${IMAGE_NAME}:${PROD_TAG} \
-                        sh -c "python manage.py migrate && pytest -v"
+                        sh -c "python manage.py migrate && pytest -v -n auto"
                 """
             }
         }
