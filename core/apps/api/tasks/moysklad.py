@@ -77,6 +77,9 @@ def order_moysklad(self, order_id):
         return
     service = MoySklad()
     products = []
+    discount_amount = order.orginal_amount - order.amount
+    discount = discount_amount / order.orginal_amount * 100
+    item_discount = discount / order.items.count()
     if order.items.count() == 0:
         print("No items in order")
         return self.retry(countdown=300)
@@ -85,6 +88,7 @@ def order_moysklad(self, order_id):
             {
                 "quantity": item.count,
                 "price": item.amount * 100,
+                "discount": item_discount,
                 "assortment": {
                     "meta": {
                         "href": item.variant.href,
