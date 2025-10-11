@@ -52,4 +52,4 @@ click-pkg
 payme-pkg
 gevent
 pytest-xdist
-
+pyTelegramBotAPI
