@@ -78,9 +78,9 @@ class ItemModel(AbstractBaseModel):
         return str(self.pk)
 
     @classmethod
-    def _create_fake(cls):
+    def _create_fake(cls, order=None):
         return cls.objects.create(
-            order=OrderModel._create_fake(),
+            order=order if order is not None else OrderModel._create_fake(),
             product=ProductModel._create_fake(),
             count=10,
             variant=ProductVariantModel._create_fake(),

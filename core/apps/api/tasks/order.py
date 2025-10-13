@@ -25,11 +25,11 @@ def notify_order(order_id):
 """
     for item in order.items.all():  # type: ignore
         message += f"""
-    {item.name}
+    {item.product.title}
     📂 Kategoriya: {item.product.categories.name} 
     🔢 Miqdor: {item.count}"""
     message += f"""👤 Ism: {order.user.first_name} {order.user.last_name}
     📞 Telefon: {order.user.phone}
     📥  pochta/olib ketish: {"Ha" if order.is_delivery else "Yo'q"}"""
-    with open(order.items.first().product.image.path, "rb") as file:  # type: ignore
+    with order.items.first().product.image.open("rb") as file:  # type: ignore
         bot.send_photo(str(channel_id), file, caption=message)

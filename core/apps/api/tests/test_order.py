@@ -1,15 +1,21 @@
+import io
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework.test import APIClient
 
-from core.apps.api.models import ItemModel, OrderModel
+from core.apps.api.models import OrderModel
+from unittest.mock import patch
+from core.apps.api.models.order import ItemModel
 from core.apps.api.models.product import BasketModel
+from core.apps.api.tasks.order import notify_order
 
 
 class OrderTest(TestCase):
 
     def _create_data(self):
-        return OrderModel._create_fake()
+        order = OrderModel._create_fake()
+        ItemModel._create_fake(order=order)
+        return order
 
     def setUp(self):
         self.client = APIClient()
@@ -37,6 +43,14 @@ class OrderTest(TestCase):
 
     def test_destroy(self):
         self.assertTrue(True)
+
+    def test_notify_order(self):
+        fake_file = io.BytesIO(b"salom")
+        with patch("django.core.files.storage.Storage.open", return_value=fake_file):
+            with patch("core.apps.api.tasks.order.bot.send_photo") as mock_send_photo:
+                mock_send_photo.return_value = True
+                notify_order(self.instance.pk)
+            mock_send_photo.assert_called_once()
 
     def test_list(self):
         response = self.client.get(self.urls["list"])

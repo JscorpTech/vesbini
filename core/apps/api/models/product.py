@@ -30,7 +30,7 @@ class ProductModel(AbstractBaseModel):
         return cls.objects.get_or_create(
             title="mock",
             desc="sasa",
-            image="none",
+            image="/test/product.jpg",
             amount=0,
         )[0]
 
