@@ -20,10 +20,14 @@ class BaseBasketSerializer(serializers.ModelSerializer):
         if "size" in attr and "color" not in attr:
             raise serializers.ValidationError({"color": "Color is required"})
         if "color" in attr and "size" in attr:
-            variant = ProductVariantModel.objects.filter(color=attr.pop("color"), size=attr.pop("size"))
-            if not variant.exists():
+            variant = ProductVariantModel.objects.filter(
+                color=attr.pop("color"), size=attr.pop("size"), product=attr.get("product")
+            ).first()
+            if variant is None:
                 raise serializers.ValidationError({"variant": ["Variant not found"]})
-            attr["variant"] = variant.first()
+            if variant.quantity <= 0:
+                raise serializers.ValidationError({"variant": ["The item is not available in stock."]})
+            attr["variant"] = variant
         return attr
 
     class Meta:

@@ -3,6 +3,7 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 
 from core.apps.api.models import BasketModel, CategoryModel, ColorModel, ProductModel, SizeModel, TagModel
+from core.apps.api.models.product import ProductVariantModel
 
 
 class ProductTest(TestCase):
@@ -223,6 +224,7 @@ class BasketTest(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.instance = self._create_data()
+        self.variant = ProductVariantModel._create_fake(0)
         self.client.force_authenticate(self.instance.user)
         self.urls = {
             "list": reverse("basket-list"),
@@ -242,6 +244,19 @@ class BasketTest(TestCase):
         )
         self.assertTrue(response.json()["status"])
         self.assertEqual(response.status_code, 201)
+
+    def test_create_invalid_variant(self):
+        response = self.client.post(
+            self.urls["list"],
+            data={
+                "product": self.instance.product.id,
+                "color": self.variant.color.id,
+                "size": self.variant.size.id,
+                "quantity": 10,
+            },
+        )
+        self.assertFalse(response.json()["status"])
+        self.assertEqual(response.status_code, 400)
 
     def test_update(self):
         self.assertTrue(True)

@@ -54,12 +54,12 @@ class ProductVariantModel(AbstractBaseModel):
         return f"color: {self.color} - size: {self.size} - quantity: {self.quantity}"
 
     @classmethod
-    def _create_fake(cls):
+    def _create_fake(cls, quantity=100):
         return cls.objects.get_or_create(
             product=ProductModel._create_fake(),
             color=ColorModel._create_fake(),
             size=SizeModel._create_fake(),
-            quantity=100,
+            quantity=quantity,
         )[0]
 
 
