@@ -32,6 +32,6 @@ def notify_order(order_id):
     message += f"""
 👤 Ism: {order.user.first_name} {order.user.last_name}
 📞 Telefon: {order.user.phone}
-📥 pochta: {"Ha" if order.is_delivery else "Yo'q"}"""
+📥 pochta: {"Yetkazib berish" if order.is_delivery else "O'zim olib ketaman"}"""
     with order.items.first().product.image.open("rb") as file:  # type: ignore
         bot.send_photo(str(channel_id), file, caption=message)
