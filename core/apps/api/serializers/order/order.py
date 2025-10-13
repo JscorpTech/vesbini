@@ -104,7 +104,7 @@ class CreateOrderSerializer(BaseOrderSerializer):
             if getattr(order, "use_cashback", 0):
                 subtract_balance(order.user, order.use_cashback)
             order.save()
-            notify_order.delay(order)
+            notify_order.delay(order.pk)
         if not validated_data.get("is_delivery"):
             confirm_order(order, False)
         return order
