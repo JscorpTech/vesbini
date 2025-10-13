@@ -19,6 +19,7 @@ class BaseProductSerializer(serializers.ModelSerializer):
 
 
 class ListProductSerializer(BaseProductSerializer):
+    variants = RetrieveProductVariantSerializer(many=True)
     amount = serializers.SerializerMethodField()
 
     def get_amount(self, obj):
@@ -31,6 +32,7 @@ class ListProductSerializer(BaseProductSerializer):
             "desc",
             "image",
             "amount",
+            "variants",
         ]
 
 
