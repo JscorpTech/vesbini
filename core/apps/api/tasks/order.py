@@ -23,7 +23,7 @@ def notify_order(order_id):
 
 ☕️Buyurtma qilingan mahsulotlar: 
 """
-    for item in order.items:  # type: ignore
+    for item in order.items.all():  # type: ignore
         message += f"""
     {item.name}
     📂 Kategoriya: {item.product.categories.name} 
@@ -31,5 +31,5 @@ def notify_order(order_id):
     message += f"""👤 Ism: {order.user.first_name} {order.user.last_name}
     📞 Telefon: {order.user.phone}
     📥  pochta/olib ketish: {"Ha" if order.is_delivery else "Yo'q"}"""
-    with open(order.items[0].product.image.path, "rb") as file:  # type: ignore
+    with open(order.items.first().product.image.path, "rb") as file:  # type: ignore
         bot.send_photo(str(channel_id), file, caption=message)
