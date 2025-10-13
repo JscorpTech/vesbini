@@ -1,3 +1,4 @@
+# type: ignore
 from django.db import models
 
 from core.apps.accounts.services import add_balance

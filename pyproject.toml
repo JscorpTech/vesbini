@@ -7,6 +7,8 @@ line_length = 120
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings.local"
+log_cli=true
+log_cli_level="info"
 python_files = "tests.py test_*.py *_tests.py"
 filterwarnings = [
     "ignore::DeprecationWarning",
