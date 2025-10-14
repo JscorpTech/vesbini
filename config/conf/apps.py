@@ -14,6 +14,7 @@ APPS = [
     "core.apps.accounts.apps.AccountsConfig",
     "click_up",
     "payme",
+    "django_prometheus",
 ]
 
 if env.bool("SILK_ENABLED", False):

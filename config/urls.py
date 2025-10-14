@@ -26,6 +26,7 @@ urlpatterns = [
     path("api/", include("core.apps.api.urls")),
     path("api/", include("core.apps.shared.urls")),
     path("api/", include("core.apps.bot.urls")),
+    path("", include("django_prometheus.urls")),  # /metrics endpoint
 ]
 
 

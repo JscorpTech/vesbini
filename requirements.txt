@@ -55,3 +55,5 @@ payme-pkg
 gevent
 pytest-xdist
 pyTelegramBotAPI
+
+django-prometheus
