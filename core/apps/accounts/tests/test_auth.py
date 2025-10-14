@@ -1,4 +1,3 @@
-import logging
 from unittest.mock import patch
 
 import pytest
@@ -117,7 +116,6 @@ def test_reset_set_password_view_invalid_token(api_client):
 def test_resend_view(api_client, test_user):
     data = {"phone": test_user.phone}
     response = api_client.post(reverse("auth-resend"), data=data)
-    logging.error(response.json())
     assert response.status_code == status.HTTP_200_OK
 
 
@@ -125,7 +123,6 @@ def test_resend_view(api_client, test_user):
 def test_reset_password_view(api_client, test_user):
     data = {"phone": test_user.phone}
     response = api_client.post(reverse("reset-password-reset-password"), data=data)
-    logging.error(response.json())
     assert response.status_code == status.HTTP_200_OK
 
 
@@ -141,5 +138,4 @@ def test_me_update_view(api_client, test_user):
     api_client.force_authenticate(user=test_user)
     data = {"first_name": "Updated"}
     response = api_client.patch(reverse("me-user-update"), data=data)
-    logging.error(response.json())
     assert response.status_code == status.HTTP_200_OK
