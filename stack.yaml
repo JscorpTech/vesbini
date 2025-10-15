@@ -74,6 +74,7 @@ services:
     environment:
       - SCRIPT=entrypoint-server.sh
       - PYTHONPYCACHEPREFIX=/var/cache/pycache
+      - PROMETHEUS_MULTIPROC_DIR=/tmp/prometheus_multiproc
     networks:
       - vesbini
     volumes:
