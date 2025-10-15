@@ -2,6 +2,7 @@ FROM jscorptech/django:latest
 
 ARG SCRIPT="entrypoint.sh"
 ENV SCRIPT=$SCRIPT
+ENV PROMETHEUS_MULTIPROC_DIR=/tmp/prometheus_metrics
 
 WORKDIR /code
 
@@ -14,6 +15,8 @@ COPY ./ /code
 COPY ./resources/scripts/$SCRIPT /code/$SCRIPT
 
 RUN chmod +x /code/resources/scripts/$SCRIPT
+
+RUN mkdir -p /tmp/prometheus_metrics
 
 CMD sh /code/resources/scripts/$SCRIPT
 
