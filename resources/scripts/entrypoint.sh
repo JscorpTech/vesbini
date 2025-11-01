@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while ! nc -z db 5432; do
+while ! nc -z $DB_HOST $DB_PORT; do
   sleep 2
   echo "Waiting postgress...."
 done
@@ -11,8 +11,4 @@ python3 manage.py compilemessages
 
 uvicorn config.asgi:application --host 0.0.0.0 --port 8000 --reload --reload-dir core --reload-dir config
 
-
-
 exit $?
-
-

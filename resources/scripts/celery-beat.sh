@@ -1,20 +1,17 @@
-
 #!/bin/bash
 
 set -e
 
-while ! nc -z db 5432; do
+while ! nc -z $DB_HOST $DB_PORT; do
   sleep 2
   echo "Waiting postgress...."
 done
-while ! nc -z redis 6379; do
+while ! nc -z $DB_HOST $DB_PORT; do
   sleep 2
   echo "Waiting redis...."
 done
 
 python3 manage.py compilemessages
-celery -A config beat -l info 
+celery -A config beat -l info
 
 exit $?
-
-
