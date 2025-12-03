@@ -108,6 +108,8 @@ services:
 
   celery-worker:
     image: jscorptech/vesbini:v1.0.9
+    env_file:
+      - .env
     environment:
       - SCRIPT=celery-worker.sh
       - PYTHONPYCACHEPREFIX=/var/cache/pycache
@@ -140,6 +142,8 @@ services:
 
   celery-beat:
     image: jscorptech/vesbini:v1.0.9
+    env_file:
+      - .env
     environment:
       - SCRIPT=celery-beat.sh
       - PYTHONPYCACHEPREFIX=/var/cache/pycache
